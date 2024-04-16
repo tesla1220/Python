@@ -10,7 +10,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 @Controller
 @RequestMapping("/order/*")
 /* 필기
-    클래스 레벨에 @RequesMapping 어노테이션 사용이 가능하다.
+    클래스 레벨에 @RequestMapping 어노테이션 사용이 가능하다.
     클래스 레벨에 공통 URL을 설정하면
     핸들러 메소드에 URL 에 중복되는 내용을 작성하지 않아도 된다.
     이 때 와일드카드(*) 를 이용해서 포괄적인 URL 패턴을 이용할 수 있다.
