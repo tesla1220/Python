@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <script>
+        const successMessage = `[[${successMessage}]]`;
+        if(successMessage){
+            alert(seccessMessage);
+        }
+    </script>
+</head>
+<body>
+    <div th:replace="common/header.html"></div>
+    <!--common이라는 디렉토리 하위에 있는 header.html이라는 파일이랑 공간을 바꾸겠다 -->
+    <table>     <!-- 메뉴들을 꺼낼 테이블 생성-->
+        <tr>
+            <th>메뉴번호</th>
+            <th>메뉴이름</th>
+            <th>메뉴가격</th>
+            <th>카테고리코드</th>
+            <th>판매상태</th>
+        </tr>
+
+        <tr th:each="menu : ${menuList}">
+            <!--값들을 하나씩 꺼내오기(반복문 사용)을 위한 타임리프 문법-->
+
+            <td th:text="${menu.code}"></td>
+            <td th:text="${menu.name}"></td>
+            <td th:text="${menu.price}"></td>
+            <td th:text="${menu.categoryCode}"></td>
+            <td th:text="${menu.orderableStatus}"></td>
+        </tr>
+    </table>
+
+</body>
+</html>
