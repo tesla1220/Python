@@ -19,6 +19,7 @@ import java.util.List;
 import java.util.Locale;
 
 
+
 @Controller
 @RequestMapping("/menu")
 public class MenuController {
@@ -51,8 +52,16 @@ public class MenuController {
 
     }
 
+    /*
+    findMenuList(): HTTP GET 메서드를 처리하며 "/menu/list" 경로에 매핑됩니다.
+    메뉴 리스트를 조회하여 모델에 추가하고, "menu/list" 뷰를 반환합니다.
+     */
+
     @GetMapping("regist")
     public void registPage() {}
+
+    /* registPage(): HTTP GET 메서드를 처리하며 "regist" 경로에 매핑됩니다.
+    아무런 로직 없이, 단순히 뷰를 반환합니다.*/
 
 
     @GetMapping(value = "category", produces = "application/json; charset=UTF-8")
@@ -64,6 +73,11 @@ public class MenuController {
     public List<CategoryDTO> findCategoryList() {
         return menuService.findAllCategory();
     }
+
+    /* findCategoryList():
+    HTTP GET 메서드를 처리하며 "category" 경로에 매핑되고, JSON 형식의 데이터를 반환합니다.
+    메뉴 카테고리 리스트를 조회하여 반환합니다. */
+
 
     @PostMapping("regist")
     public String registMenu(MenuDTO newMenu, RedirectAttributes rttr, Locale locale) {
@@ -83,5 +97,15 @@ public class MenuController {
         return "redirect:/menu/list";
         // redirect 로 list 에 보내 다시 조회함
     }
+
+    /* registMenu():
+    HTTP POST 메서드를 처리하며 "regist" 경로에 매핑됩니다.
+    새로운 메뉴를 등록하고, 성공 메시지를 Flash 속성으로 추가한 후 "/menu/list" 경로로 리다이렉션합니다.
+     */
 }
+
+/* 이 컨트롤러 클래스는 MenuService와 MessageSource를 의존성으로 주입받습니다.
+    MenuService는 메뉴와 관련된 비즈니스 로직을 처리하며,
+    MessageSource는 다국어 메시지를 처리하기 위해 사용됩니다.
+ */
 
