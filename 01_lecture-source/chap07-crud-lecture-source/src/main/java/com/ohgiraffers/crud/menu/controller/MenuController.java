@@ -1,6 +1,8 @@
 package com.ohgiraffers.crud.menu.controller;
 
+import com.ohgiraffers.crud.menu.model.dto.CategoryAndMenuDTO;
 import com.ohgiraffers.crud.menu.model.dto.CategoryDTO;
+import com.ohgiraffers.crud.menu.model.dto.MenuAndCategoryDTO;
 import com.ohgiraffers.crud.menu.model.dto.MenuDTO;
 import com.ohgiraffers.crud.menu.model.service.MenuService;
 import org.apache.logging.log4j.LogManager;
@@ -9,10 +11,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.MessageSource;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import java.util.List;
@@ -27,7 +26,7 @@ public class MenuController {
     private static final Logger logger = LogManager.getLogger(MenuController.class);
     // Logger 는 인터페이스
 
-    private final MenuService menuService;
+    private final MenuService menuService;      // MenuService 는 menu 와 관련된 비지니스 로직 처리
     private final MessageSource messageSource;      // message 를 읽을 수 있는 객체
 
     @Autowired
@@ -41,20 +40,20 @@ public class MenuController {
 
         List<MenuDTO> menuList = menuService.findAllMenus();
 
-        // Service에서 넘어온 findAllMenus()는 변수 menuList에 담기게 됨.
+        // Service 에서 넘어온 findAllMenus()는 변수 menuList에 담기게 됨.
 
         model.addAttribute("menuList", menuList);
 
         return "menu/list";
         // 전체 메뉴를 model(정보 저장하는 곳)에 담아둔 다음 return으로 menu/list 에 갖다줌
 
-        //현재 키 값 menuList 로 menu/list 명의 html 파일에서 사용할 수 있게끔 만들어줘야함
+        //현재 키 값 menuList 로 menu/list 이름의 html 파일에서 사용할 수 있게끔 만들어줘야함
 
     }
 
     /*
-    findMenuList(): HTTP GET 메서드를 처리하며 "/menu/list" 경로에 매핑됩니다.
-    메뉴 리스트를 조회하여 모델에 추가하고, "menu/list" 뷰를 반환합니다.
+    findMenuList(): HTTP GET 메서드를 처리하며 "/menu/list" 경로에 매핑
+    메뉴 리스트를 조회하여 모델에 추가하고, "menu/list" 뷰를 반환
      */
 
     @GetMapping("regist")
@@ -102,10 +101,44 @@ public class MenuController {
     HTTP POST 메서드를 처리하며 "regist" 경로에 매핑됩니다.
     새로운 메뉴를 등록하고, 성공 메시지를 Flash 속성으로 추가한 후 "/menu/list" 경로로 리다이렉션합니다.
      */
-}
+
 
 /* 이 컨트롤러 클래스는 MenuService와 MessageSource를 의존성으로 주입받습니다.
     MenuService는 메뉴와 관련된 비즈니스 로직을 처리하며,
     MessageSource는 다국어 메시지를 처리하기 위해 사용됩니다.
  */
 
+    @GetMapping("joinCategory/list")
+    public String joinCategoryList(Model model) {
+
+        List<MenuAndCategoryDTO> menuAndCategoryList = menuService.findAllMenuAndCategory();
+
+        model.addAttribute("menuAndCategoryList", menuAndCategoryList);
+
+        return "menu/joinMenu";
+    }
+
+
+    @GetMapping("/joinCategory/rightList")
+    public String categoryAndMenu(Model model){
+        List<CategoryAndMenuDTO> categoryAndMenuDTO = menuService.findAllCategoryAndMenu();
+
+        model.addAttribute("categoryAndMenu",categoryAndMenuDTO);
+
+
+        return "menu/joinRight";
+    }
+
+    @GetMapping("delete")
+    public void delete() {}
+
+    @PostMapping("/delete")
+    public String deleteMenuByCode(@RequestParam("code") int code, RedirectAttributes rttr, Locale locale) {
+
+        menuService.deleteMenuByCode(code); // Mapper 까지 전달인자로 code를 데려가야 함
+        rttr.addFlashAttribute("successMessage", messageSource.getMessage("deleteMenu", null, locale));
+
+        return "redirect:/menu/list";       // 메뉴 삭제 후 전체 조회하는 페이지로 감
+    }
+
+}

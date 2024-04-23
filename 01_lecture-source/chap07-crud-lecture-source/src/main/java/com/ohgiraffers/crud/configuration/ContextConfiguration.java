@@ -23,6 +23,7 @@ public class ContextConfiguration {
 
         source.setBasename("classpath:/messages/message");
         source.setDefaultEncoding("UTF-8");
+
         /* ReloadableResourceBundleMessageSource 객체는
         스프링에서 메시지를 관리하고 다국어 지원을 제공하는 데 사용.
         메시지의 기본 인코딩은 UTF-8로 설정되고,

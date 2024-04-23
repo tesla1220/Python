@@ -10,7 +10,7 @@ spring:
     username: ohgiraffers
     password: ohgiraffers
 
-# mybatis 환경 설정 (현재 @Mapper 애노테이션 사용한 클래스는 인지한 상태.
+# mybatis 환경 설정 (현재 @Mapper 애노테이션 사용한 클래스는 인지한 상태)
 # 추가로 MenuMapper.xml 이라는 파일의 존재를 알아야 하므로 아래와 같이 설정 추가해줌
 mybatis:
   mapper-locations: mappers/**/*.xml

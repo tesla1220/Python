@@ -1,6 +1,8 @@
 package com.ohgiraffers.crud.menu.model.dao;
 
+import com.ohgiraffers.crud.menu.model.dto.CategoryAndMenuDTO;
 import com.ohgiraffers.crud.menu.model.dto.CategoryDTO;
+import com.ohgiraffers.crud.menu.model.dto.MenuAndCategoryDTO;
 import com.ohgiraffers.crud.menu.model.dto.MenuDTO;
 import org.apache.ibatis.annotations.Mapper;
 
@@ -20,11 +22,6 @@ public interface MenuMapper {
     }
     */
 
-    /* findAllMenus():
-    모든 메뉴를 조회하는 메서드입니다.
-    데이터베이스에 저장된 모든 메뉴를 가져와서 MenuDTO 객체의 리스트로 반환합니다.
-     */
-
 
     List<CategoryDTO> findAllCategory();
 
@@ -43,6 +40,13 @@ public interface MenuMapper {
      */
 
     List<MenuDTO> findAllMenus();
+
+    List<MenuAndCategoryDTO> findAllMenuAndCategoryList();
+
+    List<CategoryAndMenuDTO> findAllCategoryAndMenu();
+
+
+    void deleteMenuByCode(int code);
 
 
 
