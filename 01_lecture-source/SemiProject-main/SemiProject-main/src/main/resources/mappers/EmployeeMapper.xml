@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "https://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="thefirstgroup.crud_practice.model.dao.EmployeeMapper">
+
+    <resultMap id="employeeResultMap" type="thefirstgroup.crud_practice.model.dto.EmployeeDTO">
+        <id property="empId" column="emp_Id"/>
+        <result property="empName" column="emp_Name"/>
+        <result property="empNo" column="emp_No"/>
+        <result property="email" column="Email"/>
+        <result property="phone" column="Phone"/>
+        <result property="deptCode" column="Dept_Code"/>
+        <result property="jobCode" column="Job_Code"/>
+        <result property="salLevel" column="Sal_Level"/>
+        <result property="salary" column="Salary"/>
+        <result property="bonus" column="Bonus"/>
+        <result property="managerId" column="Manager_Id"/>
+        <result property="hireDate" column="Hire_Date"/>
+        <result property="endDate" column="Ent_Date"/>
+        <result property="entYn" column="Ent_Yn"/>
+    </resultMap>
+
+
+    <select id="findAllEmployees" resultMap="employeeResultMap">
+        select * from employee
+    </select>
+
+    <select id="searchEmployee" resultMap="employeeResultMap">
+        select * from employee
+        where emp_id = #{empId}
+    </select>
+<!--    <select id="editSearch">-->
+<!--        select * from employee where emp_id = #{empId}-->
+<!--    </select>-->
+
+    <delete id="deleteEmployeeById" parameterType="int">
+        delete from employee
+        where emp_id = ${ empId }
+    </delete>
+
+</mapper>
