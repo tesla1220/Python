@@ -141,6 +141,6 @@ public class MenuController {
         rttr.addFlashAttribute("successMessage", messageSource.getMessage("deleteMenu", null, locale));
 
         return "redirect:/menu/list";       // 메뉴 삭제 후 전체 조회하는 페이지로 감
-    }
+    }   
 
 }
