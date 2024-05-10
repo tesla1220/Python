@@ -72,6 +72,7 @@ public class MenuController {
     // @ResponseBody를 사용하면 스프링은 메서드가 반환하는 데이터를 HTTP 응답 본문에 직접 넣어 클라이언트에게 반환
     public List<CategoryDTO> findCategoryList() {
         return menuService.findAllCategory();
+        //
     }
 
     /* findCategoryList():
