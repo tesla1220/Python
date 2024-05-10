@@ -69,6 +69,8 @@ public class MenuController {
        produces 로 데이터 타입과 데이터 인코딩 설정 제공 */
     @ResponseBody
     // @ResponseBody를 사용하면 스프링은 메서드가 반환하는 데이터를 HTTP 응답 본문에 직접 넣어 클라이언트에게 반환
+    // 즉, html에 나오는 바디 태그가 아니라 http에서 body 파트에 내가 데이터를 직접 넣어주겠다는 의미
+
     public List<CategoryDTO> findCategoryList() {
         return menuService.findAllCategory();
     }
@@ -103,10 +105,10 @@ public class MenuController {
      */
 
 
-/* 이 컨트롤러 클래스는 MenuService와 MessageSource를 의존성으로 주입받습니다.
-    MenuService는 메뉴와 관련된 비즈니스 로직을 처리하며,
-    MessageSource는 다국어 메시지를 처리하기 위해 사용됩니다.
- */
+    /* 이 컨트롤러 클래스는 MenuService와 MessageSource를 의존성으로 주입받습니다.
+        MenuService는 메뉴와 관련된 비즈니스 로직을 처리하며,
+        MessageSource는 다국어 메시지를 처리하기 위해 사용됩니다.
+     */
 
     @GetMapping("joinCategory/list")
     public String joinCategoryList(Model model) {

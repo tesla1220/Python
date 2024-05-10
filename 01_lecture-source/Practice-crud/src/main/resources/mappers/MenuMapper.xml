@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "https://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.ohgiraffers.crud.model.dao.MenuMapper">
+
+   <resultMap id="menuResultMap" type="com.ohgiraffers.crud.model.dto.MenuDTO">
+       <id property="code" column="menu_code"/>
+       <result property="name" column="menu_name"/>
+       <result property="categoryCode" column="category_code"/>
+   </resultMap>
+
+    <select id="findAllMenus" resultMap="menuResultMap">
+        select
+            *
+        from
+            tbl_menu
+        order by
+            category_code
+    </select>
+
+    <resultMap id="categoryResultMap" type="com.ohgiraffers.crud.model.dto.CategoryDTO">
+        <id property="code" column="menu_code"/>
+        <result property="name" column="menu_name"/>
+        <result property="refCategoryCode" column="ref_category_code"/>
+    </resultMap>
+
+
+
+</mapper>
