@@ -1,0 +1,13 @@
+server:
+  port: 8001
+
+spring:
+  datasource:
+    driver-class-name: com.mysql.cj.jdbc.Driver
+    url: jdbc:mysql://localhost:3306/menudb
+    username: ohgiraffers
+    password: ohgiraffers
+
+mybatis:
+  mapper-locations: mappers/**/*.xml   #mappers 라는 폴더 하위의/ 모든 파일(하위 디렉토리 포함) / 문자열.xml 이름을 가진 / 스캔을 하겠다
+# 내가 만든 mapper 파일이 어디있는 지 알려줌

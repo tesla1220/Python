@@ -1,7 +1,9 @@
 package com.ohgiraffers.crud.menu.model.service;
 
 import com.ohgiraffers.crud.menu.model.dao.MenuMapper;
+import com.ohgiraffers.crud.menu.model.dto.CategoryAndMenuDTO;
 import com.ohgiraffers.crud.menu.model.dto.CategoryDTO;
+import com.ohgiraffers.crud.menu.model.dto.MenuAndCategoryDTO;
 import com.ohgiraffers.crud.menu.model.dto.MenuDTO;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -27,7 +29,7 @@ public class MenuService {
 
     public List<MenuDTO> findAllMenus() {
 
-        return menuMapper.findAllMenus();
+        return menuMapper.findAllMenu();
 
 
         // findAllMenu()는 MenuMapper 인터페이스에 있는 메소드.
@@ -69,4 +71,21 @@ public class MenuService {
     @Transactional 애노테이션을 사용하여 이 메서드가 하나의 트랜잭션으로 처리되도록 하고,
     메서드 수행 중에 예외가 발생하면 롤백되도록 설정합니다.
      */
+
+
+    public List<MenuAndCategoryDTO> findAllMenuAndCategory() {
+
+        return menuMapper.findAllMenuAndCategoryList();
+    }
+
+
+    public List<CategoryAndMenuDTO> findAllCategoryAndMenu() {
+
+        return menuMapper.findAllCategoryAndMenu();
+    }
+
+    @Transactional
+    public void deleteMenuByCode(int code) {
+        menuMapper.deleteMenuByCode(code);
+    }
 }

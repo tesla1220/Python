@@ -25,7 +25,7 @@ public class MenuService {
         return menuMapper.findAllMenu();
 
         // findAllMenu()는 MenuMapper 인터페이스에 있는 메소드.
-        // findAllMenu()는 이 MenuService에서 호출하고 있음
+        // findAllMenu()는 MenuService에서 호출하고 있음
         // findAllMenu()는 menuMapper에서 동작 후 findAllMenus()를 호출하고 있는 Controller로 return함
 
 
