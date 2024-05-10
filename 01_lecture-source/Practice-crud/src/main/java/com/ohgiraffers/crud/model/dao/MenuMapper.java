@@ -9,7 +9,8 @@ import java.util.List;
 @Mapper
 public interface MenuMapper {
 
-    List<MenuDTO> findAllMenus();
+    List<MenuDTO> findAllMenu();
 
-    List<CategoryDTO> findAllCategory();
+    void registNewMenu(MenuDTO menuDTO);
+
 }

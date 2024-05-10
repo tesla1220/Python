@@ -8,5 +8,5 @@ spring:
     username: ohgiraffers
     password: ohgiraffers
 
-  mybatis:
-    mapper-locations: mappers/**/*.xml
+mybatis:
+  mapper-locations: mappers/**/*.xml

@@ -21,11 +21,12 @@ public class MenuService {
 
     public List<MenuDTO> findAllMenus() {
 
-        return menuMapper.findAllMenus();
+        return menuMapper.findAllMenu();
     }
 
-    public List<CategoryDTO> findAllCategory(){
-
-        return menuMapper.findAllCategory();
+    public void registNewMenu(MenuDTO newMenu){
+        menuMapper.registNewMenu(newMenu);
     }
-}
+
+    }
+
