@@ -124,7 +124,7 @@ public class MenuController {
     @GetMapping("/joinCategory/rightList")
     public String categoryAndMenu(Model model){
         List<CategoryAndMenuDTO> categoryAndMenuDTO = menuService.findAllCategoryAndMenu();
-
+    //
         model.addAttribute("categoryAndMenu",categoryAndMenuDTO);
 
 
