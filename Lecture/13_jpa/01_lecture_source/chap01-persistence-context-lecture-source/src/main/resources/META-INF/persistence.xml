@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <persistence xmlns="http://xmlns.jcp.org/xml/ns/persistence" version="2.2">
     <persistence-unit name="jpatest">
+        <!-- EntityManagerFactoryGenerator 클래스 내 설정한 name =>  Persistence.createEntityManagerFactory("jpatest")-->
 
         <!-- 내가 클래스 정보 넘길테니까 jpa 네가 관리해줘 -->
         <class>com.ohgiraffers.section02.crud.Menu</class>
