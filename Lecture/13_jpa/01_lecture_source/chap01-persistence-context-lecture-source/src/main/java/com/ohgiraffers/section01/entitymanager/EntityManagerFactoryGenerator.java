@@ -7,7 +7,7 @@ public class EntityManagerFactoryGenerator {
 
     // singleton 으로 만들기
     private static EntityManagerFactory factory
-                /* Singleton 클래스의 유일한 인스턴스를 저장할 instance라는 이름의 변수를 선언.
+                /* EntityManagerFactory 클래스의 유일한 인스턴스를 저장할 factory 라는 이름의 변수를 선언.
                 단지 EntityManagerFactory 타입의 인스턴스 factory 를 저장할 준비가 된 상태야. 실제로 인스턴스를 생성하려면 생성자를 호출해야 해 */
 
             = Persistence.createEntityManagerFactory("jpatest");
