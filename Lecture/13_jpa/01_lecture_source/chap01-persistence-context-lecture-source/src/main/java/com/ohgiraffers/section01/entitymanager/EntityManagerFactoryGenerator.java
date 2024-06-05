@@ -5,23 +5,25 @@ import jakarta.persistence.Persistence;
 
 public class EntityManagerFactoryGenerator {
 
-    // singleton 으로 만들기
+    //  EntityManagerFactory 타입의 static 변수를 선언하고 초기화
     private static EntityManagerFactory factory
-                /* EntityManagerFactory 클래스의 유일한 인스턴스를 저장할 factory 라는 이름의 변수를 선언.
+                /* EntityManagerFactory 타입의 static 변수를 선언 :
+                EntityManagerFactory 클래스의 유일한 인스턴스를 저장할 factory 라는 이름의 변수를 선언.
                 단지 EntityManagerFactory 타입의 인스턴스 factory 를 저장할 준비가 된 상태야. 실제로 인스턴스를 생성하려면 생성자를 호출해야 해 */
 
             = Persistence.createEntityManagerFactory("jpatest");
-            /*  Persistence.createEntityManagerFactory("jpatest")는 JPA에서 제공하는 정적 메서드로,
-                주어진 이름("jpatest")을 사용하여 EntityManagerFactory를 생성합니다.
-                "jpatest"는 persistence.xml 파일에 정의된 영속성 유닛(Persistence Unit) 이름입니다. */
+            /*  EntityManagerFactory 타입의 static 변수를 초기화
+            -> Persistence 클래스의 createEntityManagerFactory 메소드를 호출해서 EntityManagerFactory 인스턴스를 생성해.
+                이 메소드에 "jpatest" 라는 문자열을 전달하는데,
+                이 문자열은 persistence.xml 파일에 정의된 영속성 유닛(persistence unit)의 이름이야.*/
 
 
     /*
-    EntityManagerFactory는 JPA(Java Persistence API)의 중요한 구성 요소로,
+    EntityManagerFactory 는 JPA(Java Persistence API)의 중요한 구성 요소로,
         엔티티 매니저(EntityManager)를 생성하는 팩토리입니다.
-        이 변수는 static으로 선언되어 있어 클래스 로드 시점에 한 번만 생성됩니다.
+        이 변수는 static 으로 선언되어 있어 클래스 로드 시점에 한 번만 생성됩니다.
         이는 EntityManagerFactory 타입의 factory 변수가 클래스 로드 시점에 한 번만 생성된다는 것을 의미합니다.
-        private로 선언되어 있어 외부에서 직접 접근할 수 없습니다.
+        private 로 선언되어 있어 외부에서 직접 접근할 수 없습니다.
         이는 외부에서 인스턴스를 생성하거나 수정하지 못하도록 막기 위함입니다.
 
          **퍼시스턴스(Persistence)**는 "지속성"이라고 할 수 있어.
