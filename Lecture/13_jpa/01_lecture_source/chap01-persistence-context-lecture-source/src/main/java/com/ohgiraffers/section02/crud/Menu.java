@@ -2,7 +2,7 @@ package com.ohgiraffers.section02.crud;
 
 import jakarta.persistence.*;
 
-@Entity(name = "section02Menu")
+@Entity(name = "section02Menu")     // 보통 이름 지정 안해줌. Entity는 하나이기 때문에
 @Table(name = "tbl_menu")
 public class Menu {
 
@@ -32,8 +32,7 @@ public class Menu {
     // protected : 같은 패키지 내에 있는 녀석들만 사용 가능. 여기에선 crud 에서만 사용 가능
     protected Menu() {}
 
-    public Menu(int menuCode, String menuName, int menuPrice, int categoryCode, String orderableStatus) {
-        this.menuCode = menuCode;
+    public Menu(String menuName, int menuPrice, int categoryCode, String orderableStatus) {
         this.menuName = menuName;
         this.menuPrice = menuPrice;
         this.categoryCode = categoryCode;
@@ -41,4 +40,18 @@ public class Menu {
     }
 
 
+    public int getMenuCode() {
+
+        return this.menuCode;
+    }
+
+    public void setMenuName(String menuName) {
+        // 업데이트 할 때 전달한 값을 필드에 매칭
+        this.menuName = menuName;
+    }
+
+    public String getMenuName() {
+
+        return menuName;
+    }
 }
