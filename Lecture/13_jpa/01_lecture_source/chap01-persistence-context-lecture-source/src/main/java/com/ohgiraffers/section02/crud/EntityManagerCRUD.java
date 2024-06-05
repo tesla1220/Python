@@ -70,4 +70,18 @@ public class EntityManagerCRUD {
         // 이 메소드를 호출한 TestCode 로 foundMenu 값 넘겨줌
         return foundMenu;
     }
+
+    public Long removeAndReturnAllCount(int menuCode) {
+
+        Menu foundMenu = findMenuByMenuCode(menuCode);
+
+        EntityTransaction transaction = manager.getTransaction();
+
+        transaction.begin();
+
+        manager.remove(foundMenu);
+        manager.flush();
+
+        return getCount(manager);
+    }
 }

@@ -5,6 +5,7 @@
 
         <!-- 내가 클래스 정보 넘길테니까 jpa 네가 관리해줘 -->
         <class>com.ohgiraffers.section02.crud.Menu</class>
+        <class>com.ohgiraffers.section03.entity.Menu</class>
 
         <properties>
             <property name="jakarta.persistence.jdbc.driver" value="com.mysql.cj.jdbc.Driver"/>

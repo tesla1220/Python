@@ -1,11 +1,13 @@
 package com.ohgiraffers.section02.crud;
 
+import jakarta.persistence.Column;
 import jakarta.persistence.EntityTransaction;
 import org.junit.jupiter.api.*;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.Arguments;
 import org.junit.jupiter.params.provider.CsvSource;
 import org.junit.jupiter.params.provider.MethodSource;
+import org.junit.jupiter.params.provider.ValueSource;
 
 import java.util.stream.Stream;
 
@@ -99,6 +101,16 @@ public class EntityManagerCRUDTests {
         // 현재 modifyMenu 변경된 값 담긴 상태 (모든 연산 수행 완료 상태)
         Assertions.assertEquals(menuName, modifyMenu.getMenuName());
 
+    }
+
+    @DisplayName("메뉴 삭제 테스트")
+    @ParameterizedTest
+    @ValueSource(ints = {1})
+    void testRemoveMenu(int menuCode) {
+
+        Long count = crud.removeAndReturnAllCount(menuCode);
+
+        Assertions.assertEquals(20, count);
     }
 
 }
