@@ -9,8 +9,11 @@ public class EntityManagerFactoryGenerator {
     private static EntityManagerFactory factory
             = Persistence.createEntityManagerFactory("jpatest");
 
-    // 생성자 생ㅅ어
     private EntityManagerFactoryGenerator() {}
+
+    public static EntityManagerFactory getInstance(){
+        return factory;
+    }
 
 
 

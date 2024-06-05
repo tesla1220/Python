@@ -2,7 +2,6 @@ package com.ohgiraffers.section01.entitymanager;
 
 import jakarta.persistence.EntityManagerFactory;
 import jakarta.persistence.Persistence;
-
 public class EntityManagerFactoryGenerator {
 
     //  EntityManagerFactory 타입의 static 변수를 선언하고 초기화
@@ -33,7 +32,7 @@ public class EntityManagerFactoryGenerator {
      * */
 
 
-    // 이 클래스 외부에서 접근 못하도록 아래와 같이 설정
+    // 이 클래스 외부에서 접근 못하도록 아래와 같이 설정. 왜 생성자를 private 로 만드는 지는 하단 필기 참고
     private EntityManagerFactoryGenerator() {}
     /*
     EntityManagerFactoryGenerator 클래스의 생성자를 정의한 거야.
@@ -58,4 +57,14 @@ public class EntityManagerFactoryGenerator {
     효율적인 리소스 사용: EntityManagerFactory 는 리소스 집약적인 객체이기 때문에 한 번만 생성하고 여러 곳에서 재사용하는 것이 효율적입니다.
     안전한 접근 제어: private 생성자와 private static 변수로 외부에서의 불필요한 인스턴스 생성을 방지합니다.
 */
+
+    /*
+        * 왜 생성자를 private 으로 만들까?
+        1. 유틸리티 클래스: 유틸리티 클래스는 인스턴스 변수가 없고, 모든 메소드가 static 인 경우가 많아.
+            이 클래스는 객체를 생성할 필요 없이, 클래스 자체에서 메소드에 접근할 수 있도록 설계돼.
+            EntityManagerGenerator 가 바로 그런 유틸리티 클래스의 예시야.
+
+        2. 싱글톤 패턴: 싱글톤 패턴은 특정 클래스의 인스턴스를 하나만 만들고, 모든 코드에서 그 인스턴스를 공유하도록 보장하는 디자인 패턴이야.
+            싱글톤 패턴을 구현할 때 생성자를 private 으로 만들어 외부에서 새로운 객체를 생성하지 못하도록 막아.
+    * */
 }

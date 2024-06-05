@@ -21,12 +21,21 @@ public class EntityLifeCycleTests {
         this.lifeCycle = new EntityLifeCycle();
     }
 
-    @DisplayName("비영속 테스트")  // 컨텍스트에 등록하지 않은 상태
-    @ParameterizedTest      // 매개변수 전달
-    @ValueSource(ints = {1, 2})
+    /*  setUp 메소드가 호출되면, this.lifeCycle = new EntityLifeCycle();를 실행해.
+        여기서 this.lifeCycle 은 lifeCycle 변수를 가리켜.
+        new EntityLifeCycle()은 EntityLifeCycle 클래스의 새 객체를 만들어.
+        그래서 lifeCycle 변수에 EntityLifeCycle 의 새 객체를 저장해.
+
+        즉, EntityLifeCycle 클래스의 새 객체를 만들어서 lifeCycle 변수에 저장했어.
+        이렇게 해서 각 테스트가 시작되기 전에 항상 새로운 lifeCycle 객체를 사용할 수 있어.*/
+
+    @DisplayName("비영속 테스트")  // 테스트 설명. (컨텍스트에 등록하지 않은 상태)
+    @ParameterizedTest      // 매개변수화된 테스트
+    @ValueSource(ints = {1, 2}) // 테스트 값 제공
     void testTransition(int menuCode) {     // 파라미터값으로 1과 2를 넘겼으므로 menuCode 공간을 만들어 받을 준비
 
         Menu foundMenu = lifeCycle.findMenuByMenuCode(menuCode);
+        // 메뉴찾기: menuCode를 이용해 lifeCycle에서 Menu 객체를 찾아서 foundMenu에 저장
 
         Menu newMenu = new Menu(
                 foundMenu.getMenuCode(),
@@ -35,10 +44,19 @@ public class EntityLifeCycleTests {
                 foundMenu.getCategoryCode(),
                 foundMenu.getOrderableStatus()
         );
+        // 새로운 메뉴 만들기: foundMenu에서 가져온 값을 사용해 새로운 Menu 객체를 만들고, 이를 newMenu에 저장
 
         Assertions.assertNotEquals(foundMenu, newMenu);
-        Assertions.assertFalse(lifeCycle.getManagerInstance().contains(newMenu));
+        // 동일하지 않음 확인: foundMenu와 newMenu가 서로 다른 객체인지 확인해. assertNotEquals는 두 객체가 같지 않아야 테스트를 통과해.
 
+        Assertions.assertFalse(lifeCycle.getManagerInstance().contains(newMenu));
+        // 영속성 확인: newMenu가 EntityManager에 포함되어 있지 않은지 확인해. assertFalse는 조건이 거짓이어야 테스트를 통과해.
+
+        /*  testTransition 요약
+        이 테스트는 EntityLifeCycle 객체를 준비하고, menuCode를 통해 메뉴를 찾아 새로운 메뉴 객체를 만든 후,
+        두 객체가 서로 다른지 확인해. 또한, 새로운 메뉴 객체가 EntityManager에 포함되어 있지 않은지 확인해.
+        이 과정을 여러 번(여기서는 menuCode 1과 2로) 반복해.
+        */
     }
 
     @DisplayName("다른 엔티티 매니저가 관리하는 엔티티의 영속성 테스트")

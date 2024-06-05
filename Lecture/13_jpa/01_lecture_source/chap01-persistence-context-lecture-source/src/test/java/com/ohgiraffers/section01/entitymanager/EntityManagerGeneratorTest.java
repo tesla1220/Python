@@ -37,7 +37,19 @@ public class EntityManagerGeneratorTest {
     *    thread-safe 한 기능들은 매번 생성하기에는 비용(시간, 메모리) 부담이 크기 때문에
     *    application 스코프와 동일하게 singleton 으로 생성해서 관리하는 것이 효율적이다.
     *    따라서 데이터베이스를 사용하는 어플리케이션 당 한 개의 EntityManagerFactory 를 생성한다.
-    *    */
+    *
+    *
+    *   필기 추가
+    *    엔티티 매니저 하나를 생성할 때마다 하나의 Persistence Context가 생성돼.
+         두 개의 엔티티 매니저가 있다면, 두 개의 독립적인 Persistence Context가 존재해.
+         각 Persistence Context는 자신만의 엔티티 상태를 관리하고 변경을 추적해.
+         *
+         * 독립성: 각 Persistence Context는 독립적으로 동작해.
+         * 한 엔티티 매니저의 변경 사항은 다른 엔티티 매니저에 영향을 미치지 않아.
+         *
+         * 동일성 보장: 같은 Persistence Context 내에서는 같은 엔티티를 여러 번 조회해도 항상 동일한 객체를 반환하지만,
+         * 다른 Persistence Context에서는 같은 엔티티라도 별개의 객체로 취급될 수 있어.
+* */
 
     @Test
     @DisplayName("엔티티 매니저 팩토리 생성 확인하기")
@@ -48,6 +60,8 @@ public class EntityManagerGeneratorTest {
         System.out.println("엔티티 매니저 팩토리 hashcode : " + factory.hashCode());
 
         Assertions.assertNotNull(factory);
+
+        /* EntityManagerFactoryGenerator를 통해 EntityManagerFactory 객체를 생성하고, 그 객체가 null이 아님을 확인 */
 
     }
 
