@@ -7,6 +7,7 @@ public enum MemberRole {
     *   Type safety (타입의 안정성)을 보장할 수 있다.
     *   서로 연관된 상수들의 집합 클래스이다. */
     // enum 타입은 상수. 대문자로작성
+
     ROLE_MEMBER,
     ROLE_ADMIN
 

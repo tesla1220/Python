@@ -12,6 +12,12 @@ import java.time.LocalDateTime;
 *       - 사용불가 : final 클래스, enum, interface, inner class
 *       - 주의사항 : 저장할 필드에 final 을 사용하면 안됨  */
 
+
+
+    /* @Entity 는 클래스를 JPA 엔티티로 지정합니다.
+        @Table 은 엔티티와 매핑될 데이터베이스 테이블을 지정합니다.
+        @UniqueConstraint 는 지정된 컬럼 조합이 데이터베이스 내에서 유일함을 보장합니다.*/
+
 @Entity(name = "entityMember")
 @Table(name = "tbl_member", uniqueConstraints = {
         @UniqueConstraint(columnNames = {"member_id", "phone"})
@@ -33,7 +39,8 @@ public class Member {
     @Column(name = "member_no")
     private int memberNo;
 
-    @Column(name = "member_id", nullable = false, unique = true, columnDefinition = "varchar(10)")   // memberId가 null이면 안되기 때문에 여기선 false 로 지정
+    // memberId가 null 이면 안되기 때문에 여기선 nullable 을 false 로 지정
+    @Column(name = "member_id", nullable = false, unique = true, columnDefinition = "varchar(10)")
     private String memberId;
 
     @Column(name = "member_pwd", nullable = false)
@@ -45,7 +52,8 @@ public class Member {
     @Column(name = "phone", unique = true)
     private String phone;
 
-    @Column(name = "address", length = 900) // 글자 900 자까지 허용
+    // 글자 900 자까지 허용
+    @Column(name = "address", length = 900)
     private String address;
 
     @Column(name = "enroll_date")
@@ -59,10 +67,16 @@ public class Member {
     *               장점 : 데이터 베이스에 저장되는 데이터의 크기가 작음 (문자열로 작성했을 시 공간 더 많이 차지하기 때문)
     *   - STRING : Enum 타입을 문자열로 매핑
     *   */
+
+    /* enum은 열거형(enumeration)으로, 상수의 집합을 정의하는 특수한 클래스입니다.
+    Java에서 enum은 서로 관련된 상수들을 그룹화하는 데 사용됩니다.
+    이는 가독성을 높이고 코드에서 특정 값들만 허용하도록 제한할 수 있습니다. */
+
     @Column(name = "member_role")
-    @Enumerated(EnumType.STRING)
+    @Enumerated(EnumType.STRING)    //  enum 값을 문자열로 데이터베이스에 저장
     private MemberRole memberRole;
 
+    // status 필드를 status 컬럼에 매핑하며, char(1) 타입이고 기본값을 'Y'로 설정
     @Column(name = "status", columnDefinition = "char(1) default 'Y'")
     private String status;
 
