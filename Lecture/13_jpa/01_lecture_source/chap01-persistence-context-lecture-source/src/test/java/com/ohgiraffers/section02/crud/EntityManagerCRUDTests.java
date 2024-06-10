@@ -21,6 +21,11 @@ public class EntityManagerCRUDTests {
     void initManager() {
         this.crud = new EntityManagerCRUD();
     }
+    // 새로운 EntityManagerCRUD 객체를 생성하고, 이를 crud 필드에 할당
+
+    // 각 테스트 메서드가 실행될 때마다 crud 필드가 새로운 EntityManagerCRUD 객체를 참조하도록 보장합니다.
+    // 이는 테스트 메서드 간의 상태 공유를 방지하고, 독립적인 테스트를 가능하게 합니다.
+
 
     // 테스트 검증이 끝나면 다시 원상복구해야하므로 rollback 메소드 만들음
     @AfterEach

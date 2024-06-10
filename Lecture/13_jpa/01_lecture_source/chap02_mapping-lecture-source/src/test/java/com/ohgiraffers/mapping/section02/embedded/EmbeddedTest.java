@@ -1,7 +1,5 @@
-package com.ohgiraffers.mapping.section01.section02.embedded;
+package com.ohgiraffers.mapping.section02.embedded;
 
-import com.ohgiraffers.mapping.section02.embedded.BookRegistDTO;
-import com.ohgiraffers.mapping.section02.embedded.BookRegistService;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.params.ParameterizedTest;
