@@ -47,4 +47,11 @@ public class ManyToOneRepository {
         manager.persist(newMenu);
 
     }
+
+    /* String jpql 쿼리 해석:
+
+    SELECT c.categoryName: categoryName 필드를 선택합니다.
+    FROM menu_and_category m: menu_and_category 엔티티에서 m이라는 별칭을 사용하여 데이터를 조회합니다.
+    JOIN m.category c: menu_and_category 엔티티와 연관된 category 엔티티를 조인하여 c라는 별칭을 사용합니다.
+    WHERE m.menuCode = :menuCode: menu_and_category 엔티티의 menuCode가 주어진 menuCode와 일치하는 데이터를 필터링합니다.*/
 }

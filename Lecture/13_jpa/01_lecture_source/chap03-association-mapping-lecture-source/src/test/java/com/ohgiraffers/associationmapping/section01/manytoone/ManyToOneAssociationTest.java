@@ -45,6 +45,11 @@ public class ManyToOneAssociationTest {
     private ManyToOneService manyToOneService;
 
 
+
+    /* 🔽🔽 이 테스트는 ManyToOneService의 findMenu 메서드를 통해 특정 Menu 엔티티를 조회하고,
+      해당 Menu와 연관된 Category 엔티티가 올바르게 로드되는지 확인하는 것입니다.
+      이를 통해 N:1 연관관계가 제대로 설정되고 작동하는지 검증합니다.*/
+
     @DisplayName("N:1 연관관계 객체그래프 탐색을 이용한 조회 테스트")
     @Test
     void manyToOneFindTest() {
@@ -52,17 +57,42 @@ public class ManyToOneAssociationTest {
         // given
         int menuCode = 10;
 
-        // when : 엔티티 매니저에게 메뉴를 찾아달라고 명령
+        // when : 엔티티 매니저에게 메뉴를 찾아달라고 명령. manyToOneService의 findMenu 메서드를 호출하여 menuCode에 해당하는 Menu 엔티티를 조회
         Menu foundMenu = manyToOneService.findMenu(menuCode);
 
-        // then : 해당 메뉴에 해당하는 카테고리에 접근
+        // then : 해당 메뉴에 해당하는 카테고리에 접근. getCategory: 조회된 Menu 엔티티에서 Category 엔티티를 가져옴
         Category category = foundMenu.getCategory();
         System.out.println("category = " + category);
 
         Assertions.assertNotNull(category);
         // 먼저, category 라는 이름의 객체가 있는 지 테스트
 
+
+        /*  🔽🔽    결과    🔽🔽
+                * Hibernate:
+            select
+                m1_0.menu_code,
+                c1_0.category_code,
+                c1_0.category_name,
+                c1_0.ref_category_code,
+                m1_0.menu_name,
+                m1_0.menu_price,
+                m1_0.orderable_status
+            from
+                tbl_menu m1_0
+            left join
+                tbl_category c1_0
+                    on c1_0.category_code=m1_0.category_code
+            where
+                m1_0.menu_code=?
+        category = Category{categoryCode=12, categoryName='서양', refCategoryCode=3}
+
+
+        * 분석: 이 쿼리는 tbl_menu 테이블에서 menu_code가 주어진 값(?)인 레코드를 조회하고, 해당 레코드와 연관된 tbl_category 테이블의 데이터를 조인합니다.      */
+
     }
+
+
 
     @DisplayName("N:1 연관관계 객체지향쿼리(JPQL) 사용 카테고리 이름 조회 테스트")
     @Test
@@ -114,5 +144,12 @@ public class ManyToOneAssociationTest {
         /* 이 테스트 코드는 데이터베이스에서 category 가 FK 로 설정되어있기 때문에 category가 존재하지 않으면
         * menu 에 Insert 자체가 불가. 그래서 실제 실행창을 보면 hibernate 가 tbl_category 먼저 insert 한 후 tbl_menu 에 insert 함
         * 요약: 데이터베이스 설계에서 category 테이블이 menu 테이블과 일대다 관계(Many-to-One)를 가지기 때문에 menu가 category를 참조 */
-    }
+
+
+        /* 지연 로딩과 즉시 로딩:
+            JPA에서 객체 그래프를 로딩할 때 fetch 속성을 사용하여 연관된 객체들을 지연 로딩(Lazy Loading)하거나 즉시 로딩(Eager Loading)할 수 있습니다.
+            지연 로딩: 연관된 객체가 실제로 사용될 때 로딩됩니다.
+            즉시 로딩: 주 객체가 로딩될 때 연관된 객체도 함께 로딩됩니다.
+        */
+     }
 }
