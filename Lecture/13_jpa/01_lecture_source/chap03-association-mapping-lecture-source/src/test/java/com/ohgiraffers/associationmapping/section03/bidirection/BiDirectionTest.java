@@ -70,6 +70,8 @@ public class BiDirectionTest {
     }
 
 
+
+
     private static Stream<Arguments> getMenuInfo(){
 
         return Stream.of(
@@ -77,19 +79,33 @@ public class BiDirectionTest {
         );
 
     }
+    /* 테스트 데이터 제공 메서드 (getMenuInfo): Stream<Arguments>를 반환하여 파라미터화된 테스트에 필요한 데이터를 제공합니다. 여기서는 단일 메뉴 데이터를 제공하고 있습니다. */
+
     @DisplayName("양방향 연관관계 주인 객체를 이용한 Insert 테스트")
     @ParameterizedTest
-    @MethodSource("getMenuInfo") // 위에서 만든 메소드 사용
+    @MethodSource("getMenuInfo")
+    // 테스트 메서드 (ownerInsertTest1): @ParameterizedTest와 @MethodSource("getMenuInfo")를 통해 getMenuInfo 메서드에서 제공된 데이터를 사용하여 테스트를 수행합니다.
     void ownerInsertTest1(int menuCode, String menuName, int menuPrice, String orderableStatus){
 
+        // Category 객체 조회: biDirectionService.findCategory(4)를 호출하여 ID가 4인 Category 객체를 조회
         Category category = biDirectionService.findCategory(4);
-        Menu menu = new Menu(menuCode, menuName, menuPrice, category, orderableStatus);  // category 는 위의 category 정보로 넣어줌
 
+        // Menu 객체 생성: 주어진 파라미터와 조회한 Category 객체를 사용하여 Menu 객체를 생성
+        Menu menu = new Menu(menuCode, menuName, menuPrice, category, orderableStatus);  // category 는 위의 category 넣어줌
+
+        // 서비스 호출 및 예외 검사: biDirectionService.registMenu(menu) 호출 시 예외가 발생하지 않음을 확인
+        // 이 테스트는 메뉴와 카테고리 간의 양방향 연관 관계에서 주인 객체를 이용하여 Menu 객체가 올바르게 삽입되는지 검증
         Assertions.assertDoesNotThrow(
                 () -> biDirectionService.registMenu(menu)
         );
 
     }
+
+    /* 요약
+    *   이 코드의 목적은 biDirectionService.registMenu 메서드가 Menu 객체와 그에 연관된 Category 객체를 정상적으로 처리하는지 확인하는 것입니다.
+    *   예외가 발생하지 않는다면, 테스트는 성공으로 간주됩니다.*/
+
+
 
     private static Stream<Arguments> getCategoryInfo() {
         return Stream.of(
