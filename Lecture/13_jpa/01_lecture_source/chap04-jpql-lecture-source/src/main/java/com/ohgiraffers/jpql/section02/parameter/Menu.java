@@ -23,16 +23,18 @@ public class Menu {
     private int categoryCode;
 
     @Column(name = "orderable_status")
-    private String oderableStatus;
+    private String orderableStatus;
 
-    protected Menu() {}
+    protected Menu() {
+    }
 
-    public Menu(int menuCode, String menuName, int menuPrice, int categoryCode, String oderableStatus) {
+
+    public Menu(int menuCode, String menuName, int menuPrice, int categoryCode, String orderableStatus) {
         this.menuCode = menuCode;
         this.menuName = menuName;
         this.menuPrice = menuPrice;
         this.categoryCode = categoryCode;
-        this.oderableStatus = oderableStatus;
+        this.orderableStatus = orderableStatus;
     }
 
     public int getMenuCode() {
@@ -51,8 +53,8 @@ public class Menu {
         return categoryCode;
     }
 
-    public String getOderableStatus() {
-        return oderableStatus;
+    public String getOrderableStatus() {
+        return orderableStatus;
     }
 
     @Override
@@ -62,7 +64,7 @@ public class Menu {
                 ", menuName='" + menuName + '\'' +
                 ", menuPrice=" + menuPrice +
                 ", categoryCode=" + categoryCode +
-                ", oderableStatus='" + oderableStatus + '\'' +
+                ", orderableStatus='" + orderableStatus + '\'' +
                 '}';
     }
 }

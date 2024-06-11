@@ -16,26 +16,41 @@ public class SimpleJPQLRepository {
     private EntityManager manager;
 
 
+
     public String selectSingleMenuByTypedQuery() {
 
         String jpql = "SELECT m.menuName FROM section01Menu m WHERE m.menuCode = 8";
-        // m.menuName 으로 사용하는 이유
+        // section01Menu 엔티티에서 menuCode 가 8인 메뉴의 이름(menuName)을 선택
+        // m.menuName 으로 사용하는 이유 => 엔티티를 데이터베이스처럼 사용하고 있으므로, 엔티티에 기재된 명칭 사용
 
+
+        // jpql 쿼리를 실행하는 TypedQuery 객체를 생성. 이 쿼리는 결과가 String 타입의 데이터를 반환
         TypedQuery<String> query = manager.createQuery(jpql, String.class);
         // 반환값은 반드시 <> 안의 타입과 일치해야 한다.
+        // manager.createQuery(jpql, String.class)는 jpql 쿼리를 실행하는 TypedQuery 객체를 생성합니다.
+        // 이 쿼리는 결과가 String 타입의 데이터를 반환할 것임을 나타냅니다.
 
         // 반환값 담기. 여기선 한 행만 조회했으므로 결과가 1개
+        // query.getSingleResult() 메서드는 쿼리의 실행 결과를 하나의 String 값으로 반환합니다. 이 경우, menuName 필드의 값이 반환됩니다.
         String resultMenuName = query.getSingleResult();
 
         return resultMenuName;
 
 
+
+      /*    🔼 요약
+            section01Menu 엔티티에서 menuCode가 8인 메뉴의 이름을 String 타입으로 반환하는 방법을 보여줍니다.
+            String.class는 쿼리 결과가 String 타입임을 명시적으로 지정하여, 타입 안전성을 보장합니다.*/
+
     }
+
+
 
     public Menu findMenu(int menuCode) {
 
         return manager.find(Menu.class, menuCode);
     }
+
 
     public Object selectSingleMenuByQuery() {
 

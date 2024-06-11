@@ -15,14 +15,15 @@ public class SimpleJPQLTests {
 
 
     /* 필기 : JPQL
-    *   엔티티 객체를 중심으로 개발할 수 있는객체 지행 쿼리. SQL 보다 간결하며 특정 DBMS 에 "의존하지 않는다"
+    *   엔티티 객체를 중심으로 개발할 수 있는객체 지향 쿼리. SQL 보다 간결하며 특정 DBMS 에 "의존하지 않는다"
     *   find() 메소드를 통한 조회와 다르게, 항상 데이터베이스에 SQL 을 실행해서 결과를 조회한다.  */
 
 
     /* 필기 : JPA 의 공식 지원 기능
-    *   - JPQL : 시초에 나왔던 기술로 기본
+    *   - JPQL : 시초에 나왔던 기술로 아래 두 언어의 기본
     *   - Native SQL : JPQL 대신 직접적으로 SQL 을 사용
     *   - Criteria Query : JPQL 을 편하게 작성하도록 도와주는 API */
+
 
     /* 필기 : JPQL 의 기본 문법 (CRUD)
         🟡 조회 ( 수직 순서대로 ). [] 절은 선택
@@ -44,10 +45,12 @@ public class SimpleJPQLTests {
             [WHERE]
       */
 
+
     /* 필기 : JPQL 사용 시 주의사항
         - 엔티티와 속성은 대소문자를 구분한다. (userId != userid)
         - 엔티티명은 클래스명이 아닌 엔티티명이다. (ex. 클래스명인 Menu 가 아닌 "section01Menu"가 엔티티명)
         - JPQL 은 별칭이 필수. 별칭없이 사용하면 에러 발생 */
+
 
     /* 필기 : JPQL 사용 방법
         1. 작성한 JPQL(문자열)을 entityManager.createQuery() 메소드를 통해 쿼리 객체로 만들어준다.
@@ -59,10 +62,12 @@ public class SimpleJPQLTests {
             3-2) getResultList() : 결과가 2행 이상인 경우 사용, 컬렉션을 반환한다. 없으면 빈 컬렉션 반환.
     *   */
 
+
     @Autowired
     private SimpleJPQLRepository repository;
 
-    @DisplayName("TypedQuery를 이용한 단일메뉴(단일행, 단일컬럼) 조회 테스트")
+
+    @DisplayName("TypedQuery 를 이용한 단일메뉴(단일행, 단일컬럼) 조회 테스트")
     @Test
     void testSingleMenuByTypedQuery(){
 

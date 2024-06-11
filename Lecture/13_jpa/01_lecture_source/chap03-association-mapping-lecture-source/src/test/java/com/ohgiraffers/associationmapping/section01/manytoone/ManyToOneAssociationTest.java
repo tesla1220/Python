@@ -46,8 +46,8 @@ public class ManyToOneAssociationTest {
 
 
 
-    /* 🔽🔽 이 테스트는 ManyToOneService의 findMenu 메서드를 통해 특정 Menu 엔티티를 조회하고,
-      해당 Menu와 연관된 Category 엔티티가 올바르게 로드되는지 확인하는 것입니다.
+    /* 🔽🔽 이 테스트는 ManyToOneService 의 findMenu 메서드를 통해 특정 Menu 엔티티를 조회하고,
+      해당 Menu 와 연관된 Category 엔티티가 올바르게 로드되는지 확인하는 것입니다.
       이를 통해 N:1 연관관계가 제대로 설정되고 작동하는지 검증합니다.*/
 
     @DisplayName("N:1 연관관계 객체그래프 탐색을 이용한 조회 테스트")
@@ -57,8 +57,10 @@ public class ManyToOneAssociationTest {
         // given
         int menuCode = 10;
 
-        // when : 엔티티 매니저에게 메뉴를 찾아달라고 명령. manyToOneService의 findMenu 메서드를 호출하여 menuCode에 해당하는 Menu 엔티티를 조회
+        // when : 엔티티 매니저에게 메뉴를 찾아달라고 명령. manyToOneService 의 findMenu 메서드를 호출하여 menuCode 에 해당하는 Menu 엔티티를 조회
         Menu foundMenu = manyToOneService.findMenu(menuCode);
+
+        // * 호출한 menuCode 에 해당하는 Menu 엔티티가 foundMenu 에 담겨있는 상황
 
         // then : 해당 메뉴에 해당하는 카테고리에 접근. getCategory: 조회된 Menu 엔티티에서 Category 엔티티를 가져옴
         Category category = foundMenu.getCategory();
@@ -88,7 +90,7 @@ public class ManyToOneAssociationTest {
         category = Category{categoryCode=12, categoryName='서양', refCategoryCode=3}
 
 
-        * 분석: 이 쿼리는 tbl_menu 테이블에서 menu_code가 주어진 값(?)인 레코드를 조회하고, 해당 레코드와 연관된 tbl_category 테이블의 데이터를 조인합니다.      */
+        * 분석: 이 쿼리는 tbl_menu 테이블에서 menu_code 가 주어진 값(?)인 레코드를 조회하고, 해당 레코드와 연관된 tbl_category 테이블의 데이터를 조인합니다.      */
 
     }
 

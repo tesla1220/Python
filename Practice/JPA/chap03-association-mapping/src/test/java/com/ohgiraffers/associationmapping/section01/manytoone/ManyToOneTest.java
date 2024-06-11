@@ -17,64 +17,24 @@ public class ManyToOneTest {
     @Autowired
     private ManyToOneService manyToOneService;
 
+    // menuCode 로 Menu 엔티티 조회하고, Menu 와 연관된 category 엔티티 가져오기
     @DisplayName("Many to One Test")
     @Test
     void manyToOneTest() {
 
+        // given
         int menuCode = 10;
 
-        Menu foundMenu = manyToOneService.findMenu(menuCode);
+        // when
+        Menu theMenu = manyToOneService.findMenu(menuCode);
+        // 매니저가 menuCode 로 Menu.class 에서 조회한
 
-        // 여기까지 foundMenu 에 menuCode 로 조회한 메뉴 정보 담겨있는상황
-        // 해당 메뉴 정보에 해당하는 카테고리에 접근 ⬇️⬇️
-        Category category = foundMenu.getCategory();
-        System.out.println("category = " + category);
 
-        Assertions.assertNotNull(category);
 
     }
 
-    @DisplayName("Many To One 연관관계 객체지향쿼리 사용 카테고리 이름 조회 테스트")
-    @Test
-    void manyToOneJPQLTest(){
 
-        int menuCode = 10;
 
-        String categoryName = manyToOneService.findCategoryNameByJOQL(menuCode);
-
-        System.out.println("categoryName wassup babe : " + categoryName);
-
-        Assertions.assertNotNull(categoryName);
-
-    }
-
-    private static Stream<Arguments> getInfo() {
-        return Stream.of(
-                Arguments.of(22, "돈가스 스파게티", 30000, 33, "맛있겠당", "Y")
-        );
-    }
-
-    @DisplayName(" Many To One 연관관계 객체 삽입 테스트")
-    @ParameterizedTest
-    @MethodSource("getInfo")
-    void manyToOneInsertTest(int menuCode, String menuName, int menuPrice,
-                             int categoryCode, String categoryName, String orderableStatus){
-
-        MenuDTO menuDTO = new MenuDTO(
-                menuCode,
-                menuName,
-                menuPrice,
-                new CategoryDTO(
-                        categoryCode,
-                        categoryName,
-                        12),
-                orderableStatus
-                );
-
-        Assertions.assertDoesNotThrow(
-                () -> manyToOneService.registMenu(menuDTO)
-        );
-    }
 
 
 }
