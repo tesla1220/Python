@@ -1,12 +1,13 @@
-package com.ohgiraffers.jpql.section05.join;
+package com.ohgiraffers.jpql.section06.projection;
 
+import com.ohgiraffers.jpql.section05.join.BiDirectionMenu;
 import jakarta.persistence.*;
 
 import java.util.List;
 
-@Entity(name = "section05Category")
+@Entity(name = "BiDirectionCategory")
 @Table(name = "tbl_category")
-public class Category {
+public class BiDirectionCategory {
 
     @Id
     @Column(name = "category_code")
@@ -21,9 +22,9 @@ public class Category {
     @OneToMany(mappedBy = "category")
     private List<BiDirectionMenu> menuList;
 
-    protected Category() {}
+    protected BiDirectionCategory() {}
 
-    public Category(int categoryCode, String categoryName, Integer refCategoryCode, List<BiDirectionMenu> menuList) {
+    public BiDirectionCategory(int categoryCode, String categoryName, Integer refCategoryCode, List<BiDirectionMenu> menuList) {
         this.categoryCode = categoryCode;
         this.categoryName = categoryName;
         this.refCategoryCode = refCategoryCode;

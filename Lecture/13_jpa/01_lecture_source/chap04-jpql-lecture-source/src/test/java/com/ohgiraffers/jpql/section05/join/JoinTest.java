@@ -1,6 +1,5 @@
 package com.ohgiraffers.jpql.section05.join;
 
-import jakarta.persistence.Table;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
@@ -26,7 +25,7 @@ public class JoinTest {
     @Test
     void testInnerJoin() {
 
-        List<Menu> menuList = repository.selectInnerJoin();
+        List<BiDirectionMenu> menuList = repository.selectInnerJoin();
 
         Assertions.assertNotNull(menuList);
 
@@ -73,7 +72,7 @@ public class JoinTest {
     @Test
     void testFetchJoin() {
 
-        List<Menu> menuList = repository.selectFetchJoin();
+        List<BiDirectionMenu> menuList = repository.selectFetchJoin();
 
         Assertions.assertNotNull(menuList);
         menuList.forEach(System.out::println);

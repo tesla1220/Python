@@ -136,7 +136,7 @@ public class SimpleJPQLTests {
     @Test
     void testDistinct(){
 
-        /* tbl_menu 에서 모든 메뉴들은 카테고리를 가지고 있다. 여기에서 중복된 카테고리 코드 제거하고 카테고리 코드의 리스트를 반환받기 */
+        /* tbl_menu 에서 모든 메뉴들은 카테고리를 가지고 있다. 여기에서 중복된 카테고리 코드들은 제거하고 카테고리 코드들만의 리스트를 반환받기 */
 
         List<Integer> categoryCodeList = repository.selectUseDistinct();
         // 카테고리 코드는 int 형으로 되어있으나, 이를 클래스화시킨 wrapper class 인 Integer 를 사용.

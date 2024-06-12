@@ -62,6 +62,14 @@ public class SimpleJPQLRepository {
 
     }
 
+
+    /*  순서
+        1. JPQL 쿼리를 정의합니다.
+        2. EntityManager 를 사용하여 TypedQuery 객체를 생성합니다.
+        3.  쿼리를 실행하여 단일 Menu 객체를 가져옵니다.
+        4. 조회된 Menu 객체를 반환합니다.  */
+
+
     public Menu selectSingleRowByTypedQuery() {
 
         String jpql = "SELECT m FROM section01Menu m WHERE m.menuCode = 8";

@@ -1,10 +1,11 @@
-package com.ohgiraffers.jpql.section05.join;
+package com.ohgiraffers.jpql.section06.projection;
 
-import jakarta.persistence.*;
+import jakarta.persistence.Column;
+import jakarta.persistence.Entity;
+import jakarta.persistence.Id;
+import jakarta.persistence.Table;
 
-import java.util.List;
-
-@Entity(name = "section05Category")
+@Entity(name = "section06Category")
 @Table(name = "tbl_category")
 public class Category {
 
@@ -16,18 +17,15 @@ public class Category {
     private String categoryName;
 
     @Column(name = "ref_category_code")
-    private Integer refCategoryCode;
+    private int refCategoryCode;
 
-    @OneToMany(mappedBy = "category")
-    private List<BiDirectionMenu> menuList;
+    protected Category() {
+    }
 
-    protected Category() {}
-
-    public Category(int categoryCode, String categoryName, Integer refCategoryCode, List<BiDirectionMenu> menuList) {
+    public Category(int categoryCode, String categoryName, int refCategoryCode) {
         this.categoryCode = categoryCode;
         this.categoryName = categoryName;
         this.refCategoryCode = refCategoryCode;
-        this.menuList = menuList;
     }
 
     public int getCategoryCode() {
@@ -38,21 +36,16 @@ public class Category {
         return categoryName;
     }
 
-    public Integer getRefCategoryCode() {
+    public int getRefCategoryCode() {
         return refCategoryCode;
-    }
-
-    public List<BiDirectionMenu> getMenuList() {
-        return menuList;
     }
 
     @Override
     public String toString() {
-        return "BiDirectionCategory{" +
+        return "Category{" +
                 "categoryCode=" + categoryCode +
                 ", categoryName='" + categoryName + '\'' +
                 ", refCategoryCode=" + refCategoryCode +
-//                ", menuList=" + menuList + 순환참조 stackoverflow
                 '}';
     }
 }

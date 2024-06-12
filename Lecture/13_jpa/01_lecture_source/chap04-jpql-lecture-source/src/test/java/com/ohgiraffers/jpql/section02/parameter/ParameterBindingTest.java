@@ -57,6 +57,9 @@ public class ParameterBindingTest {
         // then
         Assertions.assertEquals(menuName, menuList.get(0).getMenuName());
 
+        System.out.println("menuName  : " + menuName );
+
+
     }
 
 }

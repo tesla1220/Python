@@ -12,10 +12,10 @@ public class JoinRepository {
     @PersistenceContext
     private EntityManager manager;
 
-    public List<Menu> selectInnerJoin() {
+    public List<BiDirectionMenu> selectInnerJoin() {
 
         String jpql = "SELECT m FROM section05Menu m JOIN m.category c";
-        List<Menu> menuList = manager.createQuery(jpql, Menu.class).getResultList();
+        List<BiDirectionMenu> menuList = manager.createQuery(jpql, BiDirectionMenu.class).getResultList();
 
         return menuList;
     }
@@ -50,10 +50,10 @@ public class JoinRepository {
     }
 
     // 엔티티와 관련된 연관 엔티티를 한 번의 쿼리로 함께 조회하기
-    public List<Menu> selectFetchJoin() {
+    public List<BiDirectionMenu> selectFetchJoin() {
 
         String jpql = "SELECT m FROM section05Menu m JOIN FETCH m.category c";
-        List<Menu> menuList = manager.createQuery(jpql, Menu.class).getResultList();
+        List<BiDirectionMenu> menuList = manager.createQuery(jpql, BiDirectionMenu.class).getResultList();
 
         return menuList;
     }
