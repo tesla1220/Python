@@ -3,28 +3,14 @@ package com.ohgiraffers.nativequery.section01.simple;
 import jakarta.persistence.*;
 
 
-
 @Entity(name = "section01Category")
-@Table(name = "tbl_category")
+@Table(name = "tbl_menu")
 @SqlResultSetMappings(value = {
-        /* 3. 결과 매핑 (자동) : @Column 으로 매핑 설정이 되어있는 경우 (자동) */
         @SqlResultSetMapping(
                 name = "categoryAutoMapping",
                 entities = {@EntityResult(entityClass = Category.class)},
-                columns = {@ColumnResult(name = "menu_count")}      // "menu_count" 가 존재하지 않기 때문에 가상의 컬럼을 만들어줌
-        ),
-        /* 4. 결과 매핑 (수동) : 매핑 설정을 수동으로 하는 경우 (Entity 내 @Column 애노테이션 필드를 아래와 같이 기술) */
-        @SqlResultSetMapping(
-                name = "categoryManualMapping",
-                entities = {
-                        @EntityResult(entityClass = Category.class , fields = {
-                                @FieldResult(name = "categoryCode", column = "category_code"),
-                                @FieldResult(name = "categoryName", column = "category_name"),
-                                @FieldResult(name = "refCategoryCode", column = "ref_category_code")
-                        })
-                },
                 columns = {@ColumnResult(name = "menu_count")}
-        )
+        ),
 })
 
 public class Category {

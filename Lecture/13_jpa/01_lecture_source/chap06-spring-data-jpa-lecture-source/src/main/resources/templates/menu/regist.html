@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+    <h1> Regist Menu</h1>
+
+        <form action="/menu/regist" method="post">
+            <label>메뉴 이름 : </label><input type="text" name="menuName"><br>
+            <label>메뉴 가격 : </label><input type="number" name="menuPrice"><br>
+            <label>카테고리 : </label>
+            <select name="categoryCode" id="categoryCode"></select><br>
+            <label>판매상태 : </label>
+            <select name="orderableStatus">
+                <option value="Y">판매가능</option>
+                <option value="N">판매불가</option>
+            </select><br>
+            <input type="submit" value="메뉴 등록">
+        </form>
+        <script>
+            fetch('/menu/category')
+                .then(res => res.json())
+                .then(data => {
+                    const $categoryCode = document.getElementById('categoryCode');
+
+                    for(let index in data) {
+                        const $option = document.createElement('option');
+                        $option.value = data[index].categoryCode;
+                        $option.textContent = data[index].categoryName;
+
+                        $categoryCode.appendChild($option);
+                    }
+                })
+        </script>
+
+</body>
+</html>
+
+<!--
+
+    🟡fetch('/menu/category')
+          fetch 함수는 지정된 URL (/menu/category)로 HTTP 요청을 보냄. 기본적으로 GET 요청을 보내며, 서버로부터 카테고리 데이터를 받아옴
+
+    🟡.then(res => res.json())
+        fetch 함수의 결과로 반환된 응답 객체(res)를 JSON 형태로 변환. 이 변환된 데이터를 다음 .then 블록으로 전달
+
+    🟡.then(data => {
+         이전 .then 블록에서 JSON 으로 변환된 데이터를 받아서 처리하는 콜백 함수. 현재 이 data 변수는 변환된 JSON 데이터를 담고 있는 상태
+
+    🟡const $categoryCode = document.getElementById('categoryCode');
+        document.getElementById('categoryCode') : HTML 문서에서 Id가 categoryCode 인 요소를 선택
+        이 경우 <select id="categoryCode"> 요소를 선택하여 $categoryCode 변수에 저장
+
+    🟡for(let index in data) {
+       for...in 루프를 사용하여 data 객체의 각 속성을 순회. data 는 카테고리의 배열 또는 객체.
+
+    🟡const $option = document.createElement('option')
+        document.createElement('option') : 새로운 <option> 요소를 생성
+        이 생성된 요소를 $option 변수에 저장
+
+    🟡 $option.value = data[index].categoryCode;
+           data[index] : 현재 루프의 인덱스에 해당하는 카테고리 데이터
+           data[index].categoryCode : 해당 카테고리의 코드 값을 가져와서 $option 요소의 value 속성에 설정
+
+
+     🟡$option.textContent = data[index].categoryName;
+         data[index].categoryName : 해당 카테고리의 이름 값을 가져와서 $option 요소의 텍스트 내용으로 설정
+         이 텍스트는 사용자에게 보여지는 옵션의 이름
+
+     🟡$categoryCode.appendChild($option);
+           $categoryCode는 <select> 요소.
+           $categoryCode에 새로운 <option> 요소를 자식으로 추가. 이렇게 하면 새로운 옵션이 <select> 요소에 추가됨
+
+ -->
+
+<!-- <script> 요약
+     코드는 다음과 같은 과정을 통해 카테고리 데이터를 동적으로 <select> 요소에 추가합니다:
+
+    1. fetch를 사용하여 /menu/category URL에서 데이터를 가져옵니다.
+    2. 응답 데이터를 JSON으로 변환합니다.
+    3. 변환된 데이터를 순회하면서 각 카테고리 항목에 대해 새로운 <option> 요소를 생성합니다.
+    4. 생성된 <option> 요소에 카테고리 코드와 이름을 설정합니다.
+    5. 이 <option> 요소를 <select id="categoryCode"> 요소에 추가합니다. -->
+
+<!--
+    const 와 let 의 차이점
+        const 와 let 은 모두 변수를 선언하는 데 사용됩니다.
+        const 는 한 번 할당된 값이 변하지 않는 상수를 선언할 때 사용되며, let 은 값이 변경될 수 있는 변수를 선언할 때 사용됩니다.
+        예를 들어, let count = 0;과 같이 선언된 변수는 이후에 count = 1;과 같이 값을 변경할 수 있습니다.
+        const 는 보통 상수 값이나 객체를 할당할 때 사용되며, let 은 반복문에서 인덱스 등의 임시 변수를 선언할 때 주로 사용됩니다. -->

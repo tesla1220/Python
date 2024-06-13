@@ -50,18 +50,32 @@ public class NativeQueryTests {
                 + " WHERE menu_code = ?";       // 위치기반으로 조회할 것이므로 물음표 사용
 
         Query nativeQuery = manager.createNativeQuery(query, Menu.class).setParameter(1, menuCode);
-        // setParameter(1, menuCode) : 1번째 물음표에 메뉴코드를 넣어줌
+        // query 문자열을 네이티브 쿼리로 실행합니다. Menu.class 는 쿼리 결과를 매핑할 엔티티 클래스를 지정합니다.
+        // .setParameter(1, menuCode): 첫 번째 매개변수(?)에 menuCode 값을 설정합니다. 여기서는  1 번째 매개변수로 15를 설정합니다.
 
         Menu foundMenu = (Menu) nativeQuery.getSingleResult();
         // Query 는 Object 타입이므로 형변환 해줌
 
-        Assertions.assertNotNull(foundMenu);    // 결과 담겼는 지 확인
-        Assertions.assertTrue(manager.contains(foundMenu));     // Persistence Context 에도 담겨있는 지 확인
+        Assertions.assertNotNull(foundMenu);
+        //  쿼리가 유효한 결과를 반환했는지 확인합니다.
+        Assertions.assertTrue(manager.contains(foundMenu));
+        // manager가 foundMenu 객체를 관리하고 있는지 확인 = Persistence Context 에도 foundMenu 가 담겨있는 지 확인
         System.out.println("foundMenu : " + foundMenu);
 
 
-        // @Transactional 했을 때 왜 오류날까? -> Persistence Context 에 담겨있는 지 확인 불가
+        // @Transactional 안했을 때 왜 오류날까? -> Persistence Context 에 담겨있는 지 확인 불가
         // 즉, 매니저가 가지고 있는 지 아닌 지 여부에 따라 매니저가 가지고 있으면 Transactional 붙여야 함 . . .
+
+        /* 요약
+            이 테스트 메서드는 다음과 같은 단계를 수행합니다:
+
+            1. menuCode 를 15로 설정합니다.
+            2. menu_code 가 15인 메뉴를 선택하는 네이티브 쿼리를 작성합니다.
+            3. 네이티브 쿼리를 실행하고 결과를 Menu 클래스 객체로 매핑합니다.
+            4. 쿼리 결과가 null 이 아님을 확인합니다.
+            5. 결과 객체가 영속성 컨텍스트에 포함되어 있는지 확인합니다.
+            6. 결과 객체를 콘솔에 출력합니다.
+*/
 
     }
 
@@ -93,7 +107,7 @@ public class NativeQueryTests {
             "자동 매핑을 사용하는 이유"
                 데이터베이스에 값을 넣을 때 엔티티와 데이터 타입을 항상 일치시켜야 한다.
                 하지만 반환값이 Object 인 경우, 우리가 원하는 데이터 타입으로 형변환을 해줘야 한다.
-                이는 entity 필드와 데이터베이스의 자료형 모두 고려해야하므로 번거롭다.                  */
+                이는 entity 필드와 데이터베이스의 자료형 모두 고려해야하므로 번거로움 => 자동 매핑 사용                */
 
 
 
