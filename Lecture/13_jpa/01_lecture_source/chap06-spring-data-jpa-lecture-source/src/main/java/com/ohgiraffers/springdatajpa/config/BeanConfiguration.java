@@ -33,13 +33,9 @@ public class BeanConfiguration {
     // 이 빈 생성 후 Service 에 생성자 생성해줌
 
 
-    //package com.ohgiraffers.springdatajpa.config;
-//
-//
-//import org.springframework.context.annotation.ComponentScan;
-//import org.springframework.context.annotation.Configuration;
-//
-///* 필기
+
+
+///* 필기 : ContextConfiguration 클래스 별도로 생성할 경우, 그 이유
 //*   어플리케이션 클래스는 본인 포함 상위 카테고리를 읽는데, config 경로 밑의 파일은 모두 읽을 수가 없다. 이 때문에 ContextConfiguration 클래스를 생성해
 //*   @Configuarion 을 만들고 @ComponentScan 으로 패키지 위치 설정해줌 => 어플리케이션 클래스에다 애노테이션 추가해도 상관없음(동일하게 작동) */
 //
