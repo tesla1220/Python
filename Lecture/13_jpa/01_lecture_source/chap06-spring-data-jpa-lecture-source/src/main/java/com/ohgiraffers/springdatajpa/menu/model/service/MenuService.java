@@ -69,7 +69,10 @@ public class MenuService {
 
     }
 
-    /* 페이징 처리를 한 메뉴 전체 조회 */
+    /* 페이징 처리를 한 메뉴 전체 조회
+            이 메소드는 페이지네이션을 이용하여 데이터베이스에서 메뉴 항목을 조회하고,
+            조회된 각 항목을 MenuDTO 객체로 변환하여 Page<MenuDTO> 형태로 반환합니다.
+            이를 통해 화면에 표시할 페이지별 메뉴 항목 목록을 효과적으로 관리하고 제어할 수 있습니다  */
 
     // Overloading : 메소드명 중복더라도 변수가 다르면 사용 가능
     public Page<MenuDTO> findMenuList(Pageable pageable){
@@ -84,6 +87,7 @@ public class MenuService {
         // DTO 타입으로 바꿔서 컨트롤러로 반환
         return menuList.map(menu -> modelMapper.map(menu, MenuDTO.class));
     }
+
 
 
     /* Query 메소드를 사용해서 조회하기 */
