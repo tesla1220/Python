@@ -17,7 +17,9 @@ import java.util.List;
 
 @Repository
 public interface MenuRepository extends JpaRepository<Menu, Integer> {
-    // <T, ID> T ->엔티티 클래스의 정보 (여기선 menu)   ID -> 자료형 : Id 애노테이션이 붙은 거에 wrapper 클래스 형 (여기선 Integer)
+    // JpaRepository<T, ID>
+    // T -> 엔티티 클래스의 이름 (여기선 Menu)
+    // ID -> 자료형 : 해당 엔티티 클래스의 Id 애노테이션이 붙은 거(Primary Key)에 wrapper 클래스 형 (여기선 menuCode의 자료형이 int 이므로 Integer)
 
     List<Menu> findByMenuPriceGreaterThan(int menuPrice);
 

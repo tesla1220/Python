@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+
+    <table>
+        <tr>
+            <th>menuCode</th>
+            <th>menuName</th>
+            <th>menuPrice</th>
+            <th>categoryCode</th>
+            <th>orderableStatus</th>
+        </tr>
+
+        <tr>
+            <td th:text="${findByMenuCode.menuCode}"></td>
+            <td th:text="${findByMenuCode.menuName}"></td>
+            <td th:text="${findByMenuCode.menuPrice}"></td>
+            <td th:text="${findByMenuCode.categoryCode}"></td>
+            <td th:text="${findByMenuCode.orderableStatus}"></td>
+        </tr>
+    </table>
+
+</body>
+</html>

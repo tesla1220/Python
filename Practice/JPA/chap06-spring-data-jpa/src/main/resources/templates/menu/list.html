@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+
+  <h1>Wasssssup Ohgiraffers!</h1>
+  <table>
+    <tr>
+      <th>menuCode</th>
+      <th>menuName</th>
+      <th>menuPrice</th>
+      <th>categoryCode</th>
+      <th>orderableStatus</th>
+    </tr>
+
+    <tr th:each="menu : ${menuDTOList}">
+      <td th:text="${menu.menuCode}"></td>
+      <td th:text="${menu.menuName}"></td>
+      <td th:text="${menu.menuPrice}"></td>
+      <td th:text="${menu.categoryCode}"></td>
+      <td th:text="${menu.orderableStatus}"></td>
+    </tr>
+  </table>
+
+</body>
+</html>

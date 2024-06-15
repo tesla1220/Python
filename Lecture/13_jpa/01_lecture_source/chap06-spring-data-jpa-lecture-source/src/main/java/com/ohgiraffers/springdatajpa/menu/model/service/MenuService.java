@@ -96,6 +96,7 @@ public class MenuService {
 //        List<Menu> menuList = repository.findByMenuPriceGreaterThan(menuPrice);
 //        List<Menu> menuList = repository.findByMenuPriceGreaterThanOrderByMenuPriceMenuPrice(menuPrice);
         List<Menu> menuList = repository.findByMenuPriceGreaterThan(menuPrice, Sort.by("menuPrice").ascending());
+//          Sort.by("menuPrice") 의 "menuPrice" 는 Menu 엔티티 내 menuPrice.
 
         return menuList.stream()
                 .map(menu -> modelMapper.map(menu, MenuDTO.class))
@@ -119,6 +120,37 @@ public class MenuService {
         // 엔티티 타입으로 써야하므로 modelMapper 사용
          repository.save(modelMapper.map(menuDTO, Menu.class));
         // menuDTO 를 Menu 엔티티 클래스로 바꿔줘
+
+    }
+
+    @Transactional      // 수정이기 때문
+    public void modifyMenu(MenuDTO modifyMenuDTO) {
+
+        Menu menuEntityResult = repository.findById(modifyMenuDTO.getMenuCode()).orElseThrow(IllegalArgumentException::new);
+        // repository 가 메뉴코드로 식별한 값 => 메뉴 엔티티
+
+        /* 1. setter 사용  - setter 사용은 지양한다. */
+//        menuEntity.setMenuName(modifyMenuDTO.getMenuName());
+
+        // 이 후 Menu 엔티티 클래스에 setMenuName 추가해줌. -> 2번 진행 위해 주석처리
+
+
+        /* 2. @Builder */
+//        menuEntityResult = menuEntityResult.toBuilder().menuName(modifyMenuDTO.getMenuName()).build();
+//        repository.save(menuEntityResult);
+
+
+        /* 3. Entity 클래스 내부에서 Builder 패턴을 사용해서 구현하기 */
+        menuEntityResult = menuEntityResult.menuName(modifyMenuDTO.getMenuName()).builder();
+        repository.save(menuEntityResult);
+
+
+    }
+
+    @Transactional
+    public void deleteMenu(int menuCode) {
+
+        repository.deleteById(menuCode);
 
     }
 }

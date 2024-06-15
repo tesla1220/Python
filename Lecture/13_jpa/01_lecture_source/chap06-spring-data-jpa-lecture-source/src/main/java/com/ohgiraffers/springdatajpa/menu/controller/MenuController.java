@@ -9,6 +9,7 @@ import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
+import org.springframework.data.repository.query.Param;
 import org.springframework.data.web.PageableDefault;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -112,6 +113,33 @@ public class MenuController {
         return "redirect:/menu/list";
 
     }
+
+    @GetMapping("/modify")
+    public void modifyMenuPage(){}
+    // "/modify" 요청 오면 뷰 페이지 반환
+
+    @PostMapping("/modify")
+    public String modifyMenu(MenuDTO modifyMenuDTO){
+
+        menuService.modifyMenu(modifyMenuDTO);
+
+
+        return "redirect:/menu/" + modifyMenuDTO.getMenuCode();
+
+    }
+
+    @GetMapping("/delete")
+    public void deleteMenuPage(){}
+
+    @PostMapping("/delete")
+    public String deleteMenu(@RequestParam int menuCode){
+
+        menuService.deleteMenu(menuCode);
+
+        return "redirect:/menu/list";
+    }
+
+
 
 }
 
