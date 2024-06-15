@@ -61,15 +61,7 @@ public class MenuController {
     @GetMapping("/regist")
     public void registMenuPage() {}
 
-//
-//    @PostMapping("/regist")
-//    public String registMenu(String menuName, int menuPrice) {
-//
-//        MenuDTO newMenuDTO = service.registNewMenu(menuName, menuPrice);
-//
-//    }
-//
-//
+
 
 
 
