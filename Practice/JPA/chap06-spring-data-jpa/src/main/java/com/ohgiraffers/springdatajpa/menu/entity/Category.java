@@ -17,12 +17,15 @@ public class Category {
     private String categoryName;
 
     @Column(name = "ref_category_code")
-    private int refCategoryCode;
+    private Integer refCategoryCode;
+
+
+
 
     public Category() {
     }
 
-    public Category(int categoryCode, String categoryName, int refCategoryCode) {
+    public Category(int categoryCode, String categoryName, Integer refCategoryCode) {
         this.categoryCode = categoryCode;
         this.categoryName = categoryName;
         this.refCategoryCode = refCategoryCode;
@@ -36,7 +39,7 @@ public class Category {
         return categoryName;
     }
 
-    public int getRefCategoryCode() {
+    public Integer getRefCategoryCode() {
         return refCategoryCode;
     }
 

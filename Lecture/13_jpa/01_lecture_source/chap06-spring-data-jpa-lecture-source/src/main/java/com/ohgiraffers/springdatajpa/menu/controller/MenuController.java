@@ -105,6 +105,8 @@ public class MenuController {
         return menuService.findAllCategory();
     }
 
+
+
     @PostMapping("/regist")
     public String registNewMenu(MenuDTO menuDTO){
 
@@ -113,6 +115,19 @@ public class MenuController {
         return "redirect:/menu/list";
 
     }
+
+
+    /* @ModelAttribute 의 사용해도 똑같음
+            @ModelAttribute 어노테이션은 폼 데이터를 객체로 바인딩하는 데 사용됩
+            이는 주로 폼 제출을 처리할 때 사용되며, 자동으로 폼 데이터의 필드를 객체의 필드에 매핑함.
+            그래서 아래와 같이 @ModelAttribute 애노테이션 사용해 메소드 설정해도 똑같이 작동
+
+            @PostMapping("/regist")
+            public String registMenu(@ModelAttribute MenuDTO menuDTO) {
+                service.registMenu(menuDTO);
+                return "redirect:/menu/list";
+            }
+    */
 
     @GetMapping("/modify")
     public void modifyMenuPage(){}
@@ -143,6 +158,19 @@ public class MenuController {
 
 }
 
+/* 일반적인 스프링 MVC의 작동 방식은 다음과 같습니다:
+
+    @Controller와 View Resolver:
+        @Controller 애노테이션이 붙은 클래스의 메서드는 일반적으로 View 이름을 반환하여 해당 View를 렌더링합니다.
+        이를 위해 View Resolver가 사용되어 Controller에서 반환한 View 이름에 해당하는 실제 View (HTML 파일 등)를 찾아 클라이언트에게 보여줍니다.
+
+    @ResponseBody 사용:
+        하지만 @ResponseBody를 사용하면 메서드가 반환하는 데이터가 HTTP 응답의 본문으로 사용됩니다.
+        이때 스프링 MVC는 데이터를 직접 클라이언트에게 전송하며, View Resolver는 사용되지 않습니다.
+        따라서 @ResponseBody를 사용하면 HTML 파일을 따로 만들지 않아도 됩니다.
+        대신에 메서드가 반환하는 데이터를 클라이언트에게 JSON 형식으로 전달할 수 있습니다.
+        이는 주로 단순한 데이터 전송이 목적인 API 개발에서 매우 유용합니다. */
+
     /* 🟠 log.info("조회한 내용 목록 : {}", menuList.getContent());
 
         이 코드는 로깅(logging)을 사용하여 정보를 기록하는 코드입니다.
@@ -169,3 +197,6 @@ public class MenuController {
             "조회한 내용 목록 : [현재 페이지의 메뉴 항목들]" 형식으로 로그를 남기는 것입니다.
             이는 디버깅이나 모니터링 목적으로 특정 시점의 실행 상태를 추적하거나,
             실행 중인 애플리케이션의 상태를 파악하는 데 유용합니다. */
+
+
+

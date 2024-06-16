@@ -15,7 +15,10 @@ public class Category {
 
     @Column(name = "ref_category_code")
     private Integer refCategoryCode;
-    // null 값이 있어서 int => Integer 로 바꿨더니 오류 해결!!
+
+    /* ️⭐⭐⭐⭐  refCategoryCode 필드가 int 타입으로 정의되어 있어서 null 값을 허용하지 않아 계속 오류남.
+    이를 해결하려면 refCategoryCode 를 Integer 와 같은 래퍼 클래스 타입으로 변경. 래퍼 클래스는 null 값을 허용하기 때문에 오류 해결됨 ⭐⭐⭐⭐*/
+
 
     public Category() {
     }

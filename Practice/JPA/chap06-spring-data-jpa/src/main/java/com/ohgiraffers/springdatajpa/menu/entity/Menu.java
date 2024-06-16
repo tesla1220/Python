@@ -23,6 +23,42 @@ public class Menu {
     @Column(name = "orderableStatus")
     private String orderableStatus;
 
+
+
+
+    /* 엔티티 클래스 내부에서 Builder 패턴 구현하기 */
+    public Menu menuCode(int var){
+        this.menuCode = var;
+        return this;
+    }
+
+    public Menu menuName(String var){
+        this.menuName = var;
+        return this;
+    }
+
+    public Menu menuPrice(int var){
+        this.menuPrice = var;
+        return this;
+    }
+
+    public Menu categoryCode(int var){
+        this.categoryCode = var;
+        return this;
+    }
+
+    public Menu orderableStatus(String var){
+        this.orderableStatus = var;
+        return this;
+    }
+
+    public Menu builder(){
+        return new Menu(menuCode, menuName, menuPrice, categoryCode, orderableStatus);
+    }
+
+
+
+
     protected Menu() {
     }
 
