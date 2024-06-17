@@ -63,7 +63,7 @@ public class MenuController {
     }
 
 
-    @GetMapping("/regist")
+    @GetMapping("/regist2")
     public void registMenuPage() {
     }
 
@@ -76,16 +76,18 @@ public class MenuController {
     }
 
 
-    @PostMapping("/regist")
+    @PostMapping("/regist2")
     public String registMenu(MenuDTO menuDTO) {
-
-        System.out.println("menuName: " + menuDTO.getMenuName());
-        System.out.println("menuPrice: " + menuDTO.getMenuPrice());
-        System.out.println("categoryCode: " + menuDTO.getCategoryCode());
-        System.out.println("orderableStatus: " + menuDTO.getOrderableStatus());
 
 
         menuService.registMenu(menuDTO);
+
+        log.info("Received MenuDTO: {}", menuDTO);
+        // 각 필드별로 값 로깅
+        log.info("menuName: {}", menuDTO.getMenuName());
+        log.info("menuPrice: {}", menuDTO.getMenuPrice());
+        log.info("categoryCode: {}", menuDTO.getCategoryCode());
+        log.info("orderableStatus: {}", menuDTO.getOrderableStatus());
 
         return "redirect:/menu/list";
 

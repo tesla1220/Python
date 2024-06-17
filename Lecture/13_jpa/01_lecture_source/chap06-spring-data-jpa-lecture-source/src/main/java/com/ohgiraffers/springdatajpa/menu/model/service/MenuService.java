@@ -155,6 +155,43 @@ public class MenuService {
     }
 }
 
+
+/* 🟠 orElseThrow(IllegalArgumentException::new)
+    Java 8의 Optional 클래스에서 제공하는 메서드입니다. 이 코드는 Optional 객체가 비어 있을 때 예외를 던지는 방식으로 처리합니다.
+
+    Context
+        menuRepository.findById(menuCode)
+            menuCode에 해당하는 엔티티를 데이터베이스에서 찾는 메서드입니다. 이 메서드는 Optional<Menu>를 반환합니다.
+            Optional은 값이 존재할 수도 있고, 존재하지 않을 수도 있는 컨테이너 클래스입니다.
+            값이 존재할 때는 해당 값을 반환하고, 존재하지 않을 때는 적절한 처리를 할 수 있도록 도와줍니다.
+
+        orElseThrow
+            Optional 클래스의 메서드로, Optional 객체가 비어 있을 경우 지정된 예외를 던집니다.
+
+        IllegalArgumentException::new
+            IllegalArgumentException 예외를 생성하는 생성자 참조입니다. :: 연산자는 메서드 참조 또는 생성자 참조를 나타냅니다.
+
+    의미
+        menuRepository.findById(menuCode).orElseThrow(IllegalArgumentException::new)
+
+        menuRepository.findById(menuCode)
+            menuCode에 해당하는 Menu 엔티티를 데이터베이스에서 찾으려고 시도합니다.
+             Optional<Menu>가 반환됩니다. 만약 menuCode에 해당하는 Menu가 존재하면 Optional은 값을 포함하고, 존재하지 않으면 비어 있게 됩니다.
+
+        orElseThrow(IllegalArgumentException::new)
+            Optional이 비어 있는 경우, 즉 menuCode에 해당하는 Menu가 존재하지 않는 경우 IllegalArgumentException을 던집니다.
+
+    정리
+        menuRepository.findById(menuCode):
+            menuCode에 해당하는 Menu를 찾습니다. 결과는 Optional<Menu>입니다.
+        orElseThrow(IllegalArgumentException::new):
+            만약 Optional<Menu>가 비어 있으면 IllegalArgumentException 예외를 던집니다. 그렇지 않으면 Optional에 들어 있는 Menu 객체를 반환합니다.
+
+   ▶️ 이 코드의 목적은 menuCode에 해당하는 Menu가 반드시 존재해야 한다는 것을 보장하는 것입니다. 존재하지 않을 경우 예외를 통해 문제를 알립니다.
+
+
+    */
+
     /* .map(menu -> modelMapper.map(menu, MenuDTO.class))
             menuList의 각 Menu 객체를 MenuDTO 객체로 변환
             modelMapper는 객체 간 변환을 지원하는 라이브러리
@@ -164,6 +201,7 @@ public class MenuService {
             스트림의 각 요소를 리스트로 수집. 따라서 최종적으로 List<MenuDTO> 형태로 변환된 메뉴 항목 목록을 반환
 
  */
+
 
 
 /* pageable.getPageNumber() <= 0 ? 0 : pageable.getPageNumber() - 1

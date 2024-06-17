@@ -29,6 +29,15 @@ public class MenuController {
         this.menuService = menuService;
     }
 
+    /*   @PathVariable
+        ▶️ for URL paths where the value is part of the resource's identifier.
+        ▶️ URL Location : Extracts values from the URL path.  e.g) /items/42
+
+         @RequestParam
+         ▶️ for query parameters where the value is an additional parameter used to control or filter the request.
+         ▶️ URL Location : Extracts values from the query string. e.g) /items?id=42
+
+*/
 
     @GetMapping("/{menuCode}")
     public String findMenuByCode(@PathVariable int menuCode, Model model){
