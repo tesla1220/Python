@@ -60,6 +60,12 @@ public class ResponseTestController {
 
         return messageMap;
     }
+    /* 🟠 Map과 같은 제네릭 타입을 사용할 때 반드시 Integer와 같은 참조 타입을 사용해야하는 이유
+            Java의 제네릭 타입 매개변수는 참조 타입만 지원합니다.
+            int는 원시 타입이므로 제네릭 타입 매개변수로 사용할 수 없습니다.
+            오토박싱과 언박싱을 통해 원시 타입과 참조 타입 간의 자동 변환이 이루어집니다.
+            Map<Integer, String>과 같은 형태로 제네릭 타입을 사용할 때 타입 안정성이 보장됩니다.
+  */
 
     /* image response
     *   produces 설정을 해주지 않으면 이미지가 텍스트 형태로 전송된다.
@@ -76,7 +82,22 @@ public class ResponseTestController {
     @GetMapping("/entity")
     public ResponseEntity<Message> getEntity() {
 
+        /* public ResponseEntity<Message> getEntity()
+        이 메서드는 ResponseEntity 라는 것을 반환합니다.
+        ResponseEntity  => HTTP 응답(웹 서버가 클라이언트에게 보내는 응답)
+        <Message> => 응답이 Message 타입의 데이터를 포함하고 있음 */
+
+
         return ResponseEntity.ok(new Message(200, "정상응답 맞니?"));
+
+        /* ResponseEntity.ok(...)
+            HTTP 상태 코드 200(OK)를 의미합니다. 이는 요청이 성공적으로 처리되었음을 나타냅니다.
+
+        new Message(200, "정상 응답 여부 확인")
+            Message라는 객체를 생성합니다. 여기서는 상태 코드 200과 메시지 "정상 응답 여부 확인"을 포함합니다. */
     }
+
+
+
 
 }
