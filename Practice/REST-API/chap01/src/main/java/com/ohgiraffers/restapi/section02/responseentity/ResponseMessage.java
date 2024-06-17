@@ -3,7 +3,6 @@ package com.ohgiraffers.restapi.section02.responseentity;
 import java.util.Map;
 import java.util.Objects;
 
-// ResponseMessage 객체는 상태 코드, 메시지, 데이터를 포함하여 HTTP 응답으로 사용됩니다.
 public class ResponseMessage {
 
     private int httpStatusCode;

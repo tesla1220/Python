@@ -63,7 +63,7 @@ public class ResponseTestController {
     @GetMapping("/entity")
     public ResponseEntity<Message> getEntity() {
 
-        return ResponseEntity.ok(new Message(200, "정상 응답 여부 확인"));
+        return ResponseEntity.ok(new Message(200,"정상 응답 여부 확인"));
     }
 
 }

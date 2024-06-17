@@ -94,7 +94,9 @@ public class ResponseTestController {
             HTTP 상태 코드 200(OK)를 의미합니다. 이는 요청이 성공적으로 처리되었음을 나타냅니다.
 
         new Message(200, "정상 응답 여부 확인")
-            Message라는 객체를 생성합니다. 여기서는 상태 코드 200과 메시지 "정상 응답 여부 확인"을 포함합니다. */
+            Message라는 객체를 생성합니다. 여기서는 상태 코드 200과 메시지 "정상 응답 여부 확인"을 포함합니다.
+
+            참고: Message Class => public Message(int httpStatusCode, String message) */
     }
 
 
