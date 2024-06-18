@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <script crossorigin src="https://unpkg.com/react@18/umd/react.development.js"></script>
+    <script crossorigin src="https://unpkg.com/react-dom@18/umd/react-dom.development.js"></script>
+    
+    <title>Document</title>
+</head>
+<body>
+    <div id="root"></div>
+    <script>
+
+
+        /* React.createElement 를 사용해서 h1 번 태그를 표현하는 엘리먼트를 만들 수 있따.
+        첫 번 째 인자 : 만들려고 하는 엘리먼트의 타입을 문자열로 정의
+        두 번 째 인자 : 만드는 엘리먼트의 프로퍼니(속성) 
+        세 번 째 인자 : 엘리먼트의 자식 노드를 표현한다. 
+        
+        렌더링 과정에서 리액트는 이 엘리먼트를 실제 DOM 엘리먼트로 변환을 해준다. 
+        
+        리액트 엘리먼트는 단지 리액트에게 DOM 엘리먼트를 구성하는 방법을 알려주는 자바스크립트 객체다. (즉, 실제 DOM 이 아닌, 가상의 DOM 개념) */
+        
+        const greetingElemnet = React.createElement("h1", {className: 'greeting', id: 'greeting'}, 'hello world');
+        const textElement = React.createElement("h3", {id: 'name'}, '안녕하세요. 리액트입니다.');
+
+        ReactDOM.createRoot(document.getElementById('root')).render(greetingElemnet);
+
+
+
+
+    </script>
+</body>
+</html>
+
+
+
+
+</html>

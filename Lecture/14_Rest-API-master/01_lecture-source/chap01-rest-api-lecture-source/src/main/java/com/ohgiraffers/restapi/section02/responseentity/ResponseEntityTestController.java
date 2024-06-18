@@ -46,7 +46,11 @@ public class ResponseEntityTestController {
         headers.setContentType(new MediaType("application", "json", Charset.forName("UTF-8")));
 
         //응답 데이터를 저장할 HashMap을 생성합니다. 이 맵은 키-값 쌍으로 데이터를 저장합니다.
+        //     **Map<String, Object>**는 키가 문자열이고 값이 어떤 타입이든 될 수 있는 맵입니다.
+        //    Object 타입은 자바의 최상위 클래스이며, 모든 클래스는 Object를 상속받습니다.
+        //    이를 통해 맵에 다양한 타입의 값을 저장할 수 있는 유연성을 제공합니다.
         Map<String, Object> responseMap = new HashMap<>();
+
         // responseMap에 "users"라는 키와 users라는 값을 넣습니다. 값 users는 위의 임시 데이터베이스에서 가져온 사용자 목록
         responseMap.put("users", users);
 

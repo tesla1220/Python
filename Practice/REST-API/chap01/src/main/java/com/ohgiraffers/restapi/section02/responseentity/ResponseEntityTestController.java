@@ -28,14 +28,5 @@ public class ResponseEntityTestController {
         users.add(new UserDTO(3, "user03", "pass03", "푸바오", LocalDate.now()));
     }
 
-    @GetMapping("/users")
-    public ResponseEntity<ResponseMessage> findAllUsers() {
-
-        HttpHeaders headers = new HttpHeaders();
-        headers.setContentType(new MediaType("application","json", Charset.forName("UTF-8")));
-
-        Map<String, Object> responseMap = new HashMap<>();
-
-    }
 
 }
