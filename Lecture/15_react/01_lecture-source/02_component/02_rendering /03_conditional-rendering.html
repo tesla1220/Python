@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script crossorigin src="https://unpkg.com/react@18/umd/react.development.js"></script>
+    <script crossorigin src="https://unpkg.com/react-dom@18/umd/react-dom.development.js"></script>
+    <script crossorigin src="https://unpkg.com/@babel/standalone/babel.min.js"></script>  
+    <title>Document</title>
+</head>
+<body>
+
+    <!--
+        * 조건부 렌더링
+        여러개의 엘리먼트 중 특정 조건에 따라서 하나의 엘리먼트만 렌더링 해보기!!
+    -->
+
+    <div id="root"></div>
+
+    <script type="text/babel">
+
+        const root = ReactDOM.createRoot(document.getElementById('root'));
+
+        /* prompt 창에 입력하는 값들은 문자열이기 때문에 parseInt 로 파싱해야 값 제대로 출력 */
+        const answer = parseInt(prompt('리액트가 재미있나요 혹시..? \n. 재미있다 \n. 어렵다'));
+
+        /* 1. 렌더링 시 조건 비교 후 조건부 렌더링 하기 (조건식이 아주 심플할 때) */
+
+        // const positiveElement = <h1>앞으로 더 재밌어질 예정입니다!</h1>;
+        // const negativeElemnet = <h1>극복해야쥐!!!</h1>;
+
+        // root.render(
+        //     (answer === 1) ? positiveElement : negativeElemnet
+        // )
+
+        /* 2. JSX 내에서 조건부로 엘리먼트 생성하기 (특정 조건에 따라서 다른 엘리먼트를 생성한다.) */
+        // /* 2-1. if 문으로 조건부 엘리먼트 생성하기 */
+        // let element; 
+
+        // if(answer === 1) {
+        //     element = <h1> 앞으로 더 재밌어질거야!!!!!</h1>
+        // } else {
+        //     element = <h1>할 수 있다!!!!!</h1>
+        // }
+
+        /* 2-2. 삼항연산자로 조건부 엘리먼트 생성하기(const를 사용할 수 있는 장점) */
+        // const element = ( answer === 1 ) ? (
+        //     <h1>앞으로 더 짜릿해질걸?</h1>
+        // ) : (
+        //     <h1>할 수 있잖아!!!</h1>
+        // )
+
+        /* 2-3. && 연산자를 이용한 조건부 엘리먼트 생성하기 (조건이 맞을 때만 엘리먼트가 보이게 할 경우) */
+        // const element = answer === 1 && <h1>That's great!! You can do better! </h1>
+
+        /* 
+            주의사항
+            false 조건을 가지고 렌더링을 하는 경우, 조건에 일치하지 않으면 렌더링 되는 요소가 없지만
+            0은 falsy 한 값임에도 불구하고 조건부 엘리먼트를 생성하게 되면 0을 반환한다.
+            (
+            Falsy 값은 boolean 값에서 false 로 평가되는 값을 의미하며 
+            null, undefined, 0, NaN, '' 이 있다. 
+            )
+        */
+
+        const number = 0;
+        console.log(!!number);  // false
+        const element = number && <h1>thruthy 일 때 등장하는 태그</h1>
+
+
+        root.render(element);
+
+
+    </script>
+    
+</body>
+</html>

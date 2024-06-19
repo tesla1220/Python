@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script crossorigin src="https://unpkg.com/react@18/umd/react.development.js"></script>
+    <script crossorigin src="https://unpkg.com/react-dom@18/umd/react-dom.development.js"></script>
+    <script crossorigin src="https://unpkg.com/@babel/standalone/babel.min.js"></script>  
+    <title>Document</title>
+</head>
+<body>
+
+    <!--
+        root div 에 들어가는 모든 엘리먼트를 ReactDOM 에서 관리하기 때문에 이것을 rootDOM 또는 root Node 라고 부른다.
+        React 로 구현된 어플리케이션은 하나의 Root 돔이 있다. 
+    -->
+
+    <div id="root"></div>
+
+    <script type="text/babel">
+
+        const element = (
+            <>
+            <h1> What time is it now?</h1>
+            <h3>It is {new Date().toLocaleTimeString()} </h3>
+            </>
+        );
+
+
+        /*
+            React Element 를 루트 DOM 노드에 렌더링 하려면 
+            ReactDOM.createRoot(루트 DOm 노드).render(우리가 렌더링할 엘리먼트)
+        
+        */
+        ReactDOM.createRoot(document.getElementById('root')).render(element);
+
+
+
+    </script>
+    
+</body>
+</html>

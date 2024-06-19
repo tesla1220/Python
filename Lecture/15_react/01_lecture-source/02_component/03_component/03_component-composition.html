@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script crossorigin src="https://unpkg.com/react@18/umd/react.development.js"></script>
+    <script crossorigin src="https://unpkg.com/react-dom@18/umd/react-dom.development.js"></script>
+    <script crossorigin src="https://unpkg.com/@babel/standalone/babel.min.js"></script>  
+    <title>Document</title>
+</head>
+<body>
+    <div id="root"></div>
+
+    <!-- ⭐️⭐️⭐️⭐️⭐️⭐️⭐️⭐️⭐️⭐️⭐️매우 중요!!!!!⭐️⭐️⭐️⭐️⭐️⭐️⭐️⭐️⭐️⭐️⭐️⭐️⭐️⭐️⭐️⭐️⭐️⭐️⭐️⭐️⭐️⭐️
+        🟠 컴포넌트의 합성
+            컴포넌트는 자신의 출력에 따른 컴포넌트를 참조할 수 있다.
+            컴포넌트는 최대한 재사용이 가능한 크기로 작게 유지해야 하며, 순수함수 처럼 작성되어야 한다. 
+    -->
+
+    <script type="text/babel">
+
+        // const User = {
+        //     name : '이혜진',
+        //     age : 20,
+        //     phone : '010-1234-5678',
+        //     email : 'glory@gmail.com'
+        // };
+
+        let name = '이혜진';
+        let age = 20;
+        let phone = '010-1315-1235';
+        let email = 'stephanie@gmail.com'
+
+        // const User = {
+        //     name: name,
+        //     age: age,
+        //     phone: phone,
+        //     email: email
+        // }
+
+        const user = {name, age, phone, email};       // 프로퍼티 단축 구문  
+
+        function NameCard() {               // function NameCard() {  } => 컴포넌트 : 즉, 우리가 화면상에 보여줄 html 태그의 모임. ⭐️⭐️⭐️⭐️⭐️⭐️컴포넌트를 묶어놓은 거를 또 다른 컴포넌트의 엘리먼트처럼 사용할 수 있다⭐️⭐️⭐️⭐️⭐️⭐️ 
+
+            return <h1>{user.name}</h1>     // <h1>{user.name}</h1> : 엘리먼트
+        }
+
+        function AgeCard() {
+
+            return <h2 style={{color: 'orangered'}}>{user.age}</h2>
+        }
+
+        function PhoneCard() {
+
+            return <h3 style={{color:'blue'}}>{user.phone}</h3>
+        }
+
+        function EmailCard() {
+
+            return <h3 style={{backgroundColor: 'yellow'}}>{user.email}</h3>
+        }
+
+        // 사용자 정의의 엘리먼트 만들기
+        function UserInfo() {
+            return (
+                <div style={{width: 300, border: '1px solid black'}}>
+                    <NameCard/>
+                    <AgeCard/>
+                    <PhoneCard/>
+                    <EmailCard/>
+                </div>
+            )
+        }
+
+        ReactDOM.createRoot(document.getElementById('root')).render(<UserInfo/>);
+
+
+        // ⭐️⭐️⭐️⭐️⭐️⭐️⭐️⭐️⭐️⭐️⭐️⭐️ 내가 만든 컴포넌트로 사용자 정의의 엘리먼트를 만들 수 있다. 
+
+        /* ⭐️⭐️⭐️⭐️⭐️⭐️⭐️⭐️⭐️⭐️⭐️⭐️⭐️⭐️⭐️⭐️⭐️⭐️⭐️⭐️⭐️⭐️⭐️⭐️⭐️⭐️⭐️⭐️⭐️⭐️
+        컴포넌트 - 우리가 렌더링할 엘리먼트의 집합 
+        이 컴포넌트를 우리가 마치 엘리먼트처럼 만들 수 있따.
+        다른 컴포넌트 내에 엘리먼트처럼 넣을 수가 있다. <컴포넌트/> 
+        ⭐️⭐️⭐️⭐️⭐️⭐️⭐️⭐️⭐️⭐️⭐️⭐️⭐️⭐️⭐️⭐️⭐️⭐️⭐️⭐️⭐️⭐️⭐️⭐️⭐️⭐️⭐️⭐️⭐️⭐️⭐️⭐️
+        */
+    </script>
+</body>
+</html>

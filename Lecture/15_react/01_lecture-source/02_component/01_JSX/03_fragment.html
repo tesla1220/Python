@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script crossorigin src="https://unpkg.com/react@18/umd/react.development.js"></script>
+    <script crossorigin src="https://unpkg.com/react-dom@18/umd/react-dom.development.js"></script>
+    <script crossorigin src="https://unpkg.com/@babel/standalone/babel.min.js"></script>    
+    <title>Document</title>
+</head>
+<body>
+    <!--
+        🔴 JSX 문법 사용 시 주의점 (규칙 사항) 
+        동일 레벨의 노드들이 연달아 정의되는 경우 문법적인 에러가 발생한다.
+
+    -->
+
+    <div id="root"></div>
+
+    <script type="text/babel">
+
+        const user = {
+            name : 'guri',
+            phone : '010-1234-5678'
+        }
+
+        /* ⭐️⭐️⭐️⭐️⭐️⭐️최상위 엘리먼트를 우리가 정해줘야 한다. 5번 형식 가장 많이 씀*⭐️⭐️⭐️⭐️⭐️⭐️⭐️/ 
+
+        /* 1. 최상위 엘리먼트가 두 개 이상이면 에러가 발생한다. (하나의 돔트리만 생성) */
+        // const element = (
+        //     <h1>Hello</h1>
+        //     <h3>Hello</h3>
+        // )                            => 부모-부모, 자식-자식 같은 관계는 오류 발생. 부모-자식 의 배열이 되어야 함.
+
+        /* 2. 최상위 엘리먼트 div 를 만들어서 하나의 돔트리를 생성해보자 */
+        // const element = (
+        //     <div>
+        //         <h1>Hello, {user.name}</h1>
+        //         <h3>phone : {user.phone}</h3>
+        //     </div>    
+        // );
+
+        // ReactDOM.createRoot(document.getElementById('root')).render(element);
+
+        /* 3. <React.Fragment> 감싸서 형식상의 돔트리를 구성할 수 있다. */ 
+            // const element = (
+            //     <React.Fragment>
+            //         <h1>Hello, {user.name}</h1>
+            //         <h3>phone : {user.phone}</h3>
+            //         </React.Fragment>
+            // )
+
+
+        /* 4.⭐️ ⭐️ ⭐️  React 라이브러리로부터 Fragment 객체 구조분해 할당 을 하면 React. 생략 가능  ⭐️ ⭐️ ⭐️ */
+        const {Fragment} = React;
+        // const Fragment = React.Fragment;    위의 식의 의미
+
+        // const element = (
+        //     <Fragment>
+        //         <h1>Hello, {user.name}</h1>
+        //         <h3>phone : {user.phone}</h3>
+        //         </Fragment>
+        // )
+
+        /* 5. React.Fragment 의 축약 문법 <></> 로 감싸서 사용할 수 있다. */
+        const element = (
+            <>
+            <h1>Hello, {user.name}</h1>
+            <h3>phone : {user.phone}</h3>
+            </>
+        )
+        
+        ReactDOM.createRoot(document.getElementById('root')).render(element);
+        
+    </script>
+
+</body>
+</html>

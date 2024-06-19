@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script crossorigin src="https://unpkg.com/react@18/umd/react.development.js"></script>
+    <script crossorigin src="https://unpkg.com/react-dom@18/umd/react-dom.development.js"></script>
+    <script crossorigin src="https://unpkg.com/@babel/standalone/babel.min.js"></script>    
+    <title>Document</title>
+</head>
+<body>
+    <div id="root"></div>
+
+    <!--
+        JSX 란?
+        React.createElement 이용해서 엘리먼트를 정의하는 방법은 불편하며 가독성이 좋지 않음.
+        그래서 react 팀은 ReactElement 를 정의하는 간편한 방법으로 JSX 를 제공한다.
+        JSX 는 자바스크립트를 확장한 문법으로, ReactElement 를 xml 문법 형식으로 정의할 수 있는 문법이다. 
+
+        단, JSX 는 공식적인 자바스크립트 문법이 아니다. 바벨이라는 트랜스 파일링 툴이 필요하다.
+        바벨 적용 방법(CDN)
+        - script 태그에 type 속성으로 text/babel
+
+    -->
+    
+    <script type="text/babel">
+
+        const Helloworld = <h1>Yo Wasssssup</h1>
+
+        ReactDOM.createRoot(document.getElementById('root')).render(Helloworld);        {/* render() 에는 위에 적은 변수명 기입*/}
+
+
+    </script>
+    
+</body>
+</html>

@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script crossorigin src="https://unpkg.com/react@18/umd/react.development.js"></script>
+    <script crossorigin src="https://unpkg.com/react-dom@18/umd/react-dom.development.js"></script>
+    <script crossorigin src="https://unpkg.com/@babel/standalone/babel.min.js"></script>  
+    <title>Document</title>
+</head>
+<body>
+    <div id="root"></div>
+
+    <script type="text/babel">
+
+        const root = ReactDOM.createRoot(document.getElementById('root'));
+
+        function tick() {
+            const element = (
+                <>
+                    <h1>What Time is it now?</h1>
+                    <h3>It is {new Date().toLocaleTimeString()}</h3>
+                </>
+            );
+
+            root.render(element);
+        }
+
+        setInterval(tick, 1000);
+
+
+            /* 
+                1초마다 tick 이라는 함수를 호출하여 새로운 엘리먼트를 생성하고 rendering 한다.
+                매 초마다 새로운 엘리먼트를 만들ㅇ서 렌더링하지만, 
+                개발자 도구를 이용해서 보면, 실제 업데이트 되는 부분만 갱신되는 것을 확인할 수 있다.
+
+                리액트 엘리먼트는 실제 DOM 과는 다르게 메모리 상에서 연산되는 가상의 DOM(virtual DOM)이다.
+                가상 돔은 실제 돔과 동일한 트리 구조를 가지고 있게되며
+                엘리먼트를 새롭게 만들면 render 호출 시 가장 DOM 에 새로운 엘리먼트를 생성하고
+                실제 렌더트리와 비교를 진행한다. (diff 알고리즘)
+                그 다음 비교한 결과에서 변화가 있는 부분만 변경을 시켜준다. -> 성능 최적화
+                */
+
+
+    </script>
+    
+</body>
+</html>
