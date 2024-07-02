@@ -18,6 +18,11 @@ import java.time.LocalDateTime;
         @Table 은 엔티티와 매핑될 데이터베이스 테이블을 지정합니다.
         @UniqueConstraint 는 지정된 컬럼 조합이 데이터베이스 내에서 유일함을 보장합니다.*/
 
+    /* name = "entityMember"는 이 엔티티의 이름을 "entityMember"로 지정합니다.
+        주로 JPQL(Java Persistence Query Language) 쿼리에서 사용됩니다. */
+    /* uniqueConstraints 는 이 테이블에서 member_id와 phone 열의 조합이 고유해야 함을 지정합니다.
+       즉, 같은 member_id와 phone 의 조합이 중복될 수 없습니다. */
+
 @Entity(name = "entityMember")
 @Table(name = "tbl_member", uniqueConstraints = {
         @UniqueConstraint(columnNames = {"member_id", "phone"})

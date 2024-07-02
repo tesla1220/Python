@@ -46,7 +46,8 @@ public class EmbeddedIdTest {
     @MethodSource("getLikeCompositeKey")
     void testGenerateLike(int likedMemberNo, int likedBookNo){
 
-        // testGenerateLike 메소드는 likedMemberNo와 likedBookNo라는 두 개의 정수 인수를 받습니다. 이 인수들은 getLikeCompositeKey 메소드에서 제공된 값들입니다.
+        // testGenerateLike 메소드는 likedMemberNo와 likedBookNo라는 두 개의 정수 인수를 받습니다.
+        // 이 인수들은 getLikeCompositeKey 메소드에서 제공된 값들입니다.
 
         Assertions.assertDoesNotThrow(
                 () -> likeBookService.generateLikeBook(
