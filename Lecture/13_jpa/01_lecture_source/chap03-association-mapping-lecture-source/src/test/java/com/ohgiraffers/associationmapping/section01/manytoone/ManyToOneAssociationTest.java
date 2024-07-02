@@ -99,9 +99,9 @@ public class ManyToOneAssociationTest {
     @DisplayName("N:1 연관관계 객체지향쿼리(JPQL) 사용 카테고리 이름 조회 테스트")
     @Test
     void manyToOneJPQLFindTest() {
-        int menuCode = 10;
+        int theMenuCode = 10;
 
-        String categoryName = manyToOneService.findCategoryNameByJpql(menuCode);
+        String categoryName = manyToOneService.findCategoryNameByJpql(theMenuCode);
 
         System.out.println(categoryName);
 

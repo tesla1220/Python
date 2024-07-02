@@ -22,9 +22,9 @@ public class ManyToOneService {
         return manyToOneRepository.find(menuCode);
     }
 
-    public String findCategoryNameByJpql(int menuCode) {
+    public String findCategoryNameByJpql(int theMenuCode) {
 
-        return manyToOneRepository.findCategoryName(menuCode);
+        return manyToOneRepository.findCategoryName(theMenuCode);
     }
 
     @Transactional

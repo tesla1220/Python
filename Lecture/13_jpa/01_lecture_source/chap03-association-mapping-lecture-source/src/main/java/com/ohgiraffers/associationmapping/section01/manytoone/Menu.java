@@ -24,8 +24,8 @@ public class Menu {
     *   영속성 전이
     *       : 특정 엔티티를 영속화(등록)할 때, 연관된 엔티티도 함꼐 영속화한다는 의미다.
     *       : 즉, Menu 엔티티를 영속화할 때, 이와 연관된 Category 도 같이 영속화 시킨다. */
-    @ManyToOne(cascade = CascadeType.PERSIST)      // 하나의 카테고리 코드는 많은 메뉴코드를 갖고 카테고리가 Many. 메뉴가 One. 하단 해석 참고
-    @JoinColumn(name = "category_code")     // 데이터테이블에서 외래키 열의 이름 지정
+    @ManyToOne(cascade = CascadeType.PERSIST)      // 여러개의 Menu 엔터티가 하나의 Category 엔터티와 연결
+    @JoinColumn(name = "category_code")     // @JoinColumn: Menu 데이터 테이블에서 Category 테이블을 참조하는 외래키 열의 이름 지정
     private Category category;
 
     @Column(name = "orderable_status")

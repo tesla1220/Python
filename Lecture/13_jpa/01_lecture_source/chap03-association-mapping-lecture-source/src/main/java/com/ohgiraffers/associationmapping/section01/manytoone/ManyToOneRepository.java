@@ -29,7 +29,7 @@ public class ManyToOneRepository {
     *       - ‼️‼️주의사항 : from 절에 기술할 테이블명에는 반드시 엔티티명을 작성해야 한다.‼️‼️
     *       - 쿼리문에서 변수의 값을 바인딩하기 위한 jpql 문법 => 콜론(:) ex) :menuCode
      * */
-    public String findCategoryName(int menuCode) {
+    public String findCategoryName(int theMenuCode) {
 
         String jpql = "SELECT c.categoryName "
                 + "FROM menu_and_category m "
@@ -37,7 +37,7 @@ public class ManyToOneRepository {
                 + "WHERE m.menuCode = :menuCode";
 
         return manager.createQuery(jpql, String.class)
-                .setParameter("menuCode", menuCode)   // 그냥 menuCode 라고 하면 매니저가 식별하지 못하므로, "menuCode"는 우리가 전달한 menuCode야 라고 알려줌
+                .setParameter("menuCode", theMenuCode)   // 그냥 menuCode 라고 하면 매니저가 식별하지 못하므로, "menuCode"는 우리가 전달한 theMenuCode 라고 알려줌
                 .getSingleResult();
 
     }
@@ -50,8 +50,10 @@ public class ManyToOneRepository {
 
     /* String jpql 쿼리 해석:
 
-    SELECT c.categoryName: categoryName 필드를 선택합니다.
-    FROM menu_and_category m: menu_and_category 엔티티에서 m이라는 별칭을 사용하여 데이터를 조회합니다.
-    JOIN m.category c: menu_and_category 엔티티와 연관된 category 엔티티를 조인하여 c라는 별칭을 사용합니다.
-    WHERE m.menuCode = :menuCode: menu_and_category 엔티티의 menuCode가 주어진 menuCode와 일치하는 데이터를 필터링합니다.*/
+    jpql 변수는 JPQL(Java Persistence Query Language) 쿼리를 문자열로 정의합니다.
+    SELECT c.categoryName: c라는 별칭을 가진 카테고리 엔티티의 categoryName 속성을 선택합니다.
+    FROM menu_and_category m: menu_and_category 엔티티를 m 이라는 별칭으로 지정하여 쿼리의 대상이 됩니다.
+    join m.category c: m (메뉴 엔티티)와 연관된 category 엔티티를 c 라는 별칭으로 지정하여 조인합니다.
+    WHERE m.menuCode = :menuCode: 조건절로, menu_and_category 의 menuCode 속성이 파라미터 :menuCode 와 일치하는 행을 찾습니다.
+*/
 }
