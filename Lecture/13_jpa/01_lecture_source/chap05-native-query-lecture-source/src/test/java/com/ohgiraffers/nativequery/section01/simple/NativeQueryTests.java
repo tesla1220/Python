@@ -11,6 +11,21 @@ import org.springframework.boot.test.context.SpringBootTest;
 
 import java.util.List;
 
+/*
+엔티티 매핑 필요 여부:
+
+1) createNativeQuery(query, Menu.class)는 엔티티 클래스(Menu)로 결과를 매핑할 때 사용됩니다.
+즉, 결과가 엔티티 객체로 매핑될 수 있는 구조를 가져야 합니다. 이 방식은 객체 지향적으로 데이터를 다루고자 할 때 유용합니다.
+
+2) createNativeQuery(query)는 엔티티 매핑 없이 결과를 원시 데이터 형태로 처리하고자 할 때 사용됩니다.
+이 방식은 엔티티 객체로 매핑하기 힘든 복잡한 쿼리나, 단순히 일부 열만 필요한 경우에 유용합니다.
+
+결과 처리 방식:
+
+엔티티 매핑을 사용하면, 결과를 쉽게 엔티티 객체로 다룰 수 있고, JPA의 다양한 기능(예: 캐싱, 변경 감지 등)을 사용할 수 있습니다.
+원시 데이터 형태로 결과를 받으면, 각 결과를 수동으로 처리해야 하지만 더 유연한 쿼리 작성과 빠른 성능을 기대할 수 있습니다.
+*/
+
 @SpringBootTest
 public class NativeQueryTests {
 
@@ -47,7 +62,7 @@ public class NativeQueryTests {
         // when
         String query = "SELECT menu_code, menu_name, menu_price, category_code, orderable_status "
                 + " FROM tbl_menu"
-                + " WHERE menu_code = ?";       // 위치기반으로 조회할 것이므로 물음표 사용
+                + " WHERE menu_code = ?";       // ? : Parameter 를 binding 할 수 있는 자리 표시자
 
         Query nativeQuery = manager.createNativeQuery(query, Menu.class).setParameter(1, menuCode);
         // query 문자열을 네이티브 쿼리로 실행합니다. Menu.class 는 쿼리 결과를 매핑할 엔티티 클래스를 지정합니다.
@@ -65,6 +80,20 @@ public class NativeQueryTests {
 
         // @Transactional 안했을 때 왜 오류날까? -> Persistence Context 에 담겨있는 지 확인 불가
         // 즉, 매니저가 가지고 있는 지 아닌 지 여부에 따라 매니저가 가지고 있으면 Transactional 붙여야 함 . . .
+
+        /*  setParameter
+        JPQL이나 Native Query를 작성할 때, 쿼리 내에 파라미터를 바인딩할 수 있는 자리 표시자를 사용할 수 있습니다.
+        위의 경우 ?는 자리 표시자로 사용됩니다. 이 자리 표시자는 실제 쿼리가 실행될 때 해당 위치에 값을 바인딩해야 합니다.
+        setParameter 메서드를 사용하여 이 값을 지정합니다.
+
+         setParameter(1, menuCode);는 첫 번째 자리 표시자(?)에 menuCode 값을 바인딩하는 역할을 합니다.
+         여기서 1은 첫 번째 자리 표시자를 의미하며, SQL 쿼리의 파라미터 인덱스를 나타냅니다.
+
+         이러한 방식으로 쿼리를 작성하면 다음과 같은 이점이 있습니다:
+            1) SQL 인젝션 방지: 쿼리 파라미터를 직접 문자열로 결합하지 않기 때문에 SQL 인젝션 공격을 예방할 수 있습니다.
+            2) 가독성 향상: 쿼리와 파라미터를 분리하여 가독성을 높일 수 있습니다.
+            3) 재사용성 증가: 동일한 쿼리를 다양한 파라미터와 함께 사용할 수 있습니다.
+ */
 
         /* 요약
             이 테스트 메서드는 다음과 같은 단계를 수행합니다:
@@ -86,6 +115,7 @@ public class NativeQueryTests {
         String query = "SELECT menu_name, menu_price FROM tbl_menu";
 
         List<Object[]> menuList = manager.createNativeQuery(query).getResultList();
+        // 엔티티 매핑이 필요 없음: 결과를 특정 엔티티 클래스에 매핑하지 않고, 일반적인 Object 배열이나 Map 형태로 결과를 받을 수 있습니다.
 
         Assertions.assertNotNull(menuList);
         menuList.forEach(
@@ -98,8 +128,17 @@ public class NativeQueryTests {
         );
     }
 
+    /* menuList.forEach:
+            menuList는 List<Object[]> 타입입니다.
+            forEach 메서드는 menuList의 각 요소에 대해 람다식을 실행합니다.
 
+        row -> { ... }:
+            row는 menuList의 각 요소로, Object[] 타입입니다.
+            람다 표현식으로, menuList의 각 Object[] 요소에 대해 실행할 코드를 정의합니다.
 
+        for (Object col : row):
+            row는 Object[] 배열이므로, for-each 루프를 통해 배열의 각 요소(col)를 순회합니다.
+            col은 Object 타입으로, row 배열의 각 요소를 나타냅니다.*/
 
     /* 자료 넣을 때 자료형 지정해줘야하는데 타입이 Object 일 때 데이터베이스에 저장할 수 없으므로 */
 
