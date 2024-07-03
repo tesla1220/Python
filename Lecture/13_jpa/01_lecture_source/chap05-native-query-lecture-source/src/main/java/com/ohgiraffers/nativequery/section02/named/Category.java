@@ -14,7 +14,7 @@ import jakarta.persistence.*;
 })
 @NamedNativeQueries( value = {
         @NamedNativeQuery(
-                name = "Category.menuCountOfCategory",
+                name = "Category.menuCountOfCategory",  // nmame = 이 쿼리의 이름입니다. 이 이름을 통해 쿼리를 호출할 수 있습니다.
                 query = "SELECT a.category_code, a.category_name, a.ref_category_code, COALESCE(v.menu_count, 0) menu_count"
                         + " FROM tbl_category a"
                         + " LEFT JOIN (SELECT COUNT(*) AS menu_count, b.category_code)"

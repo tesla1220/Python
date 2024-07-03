@@ -137,8 +137,8 @@ public class NativeQueryTests {
             람다 표현식으로, menuList의 각 Object[] 요소에 대해 실행할 코드를 정의합니다.
 
         for (Object col : row):
-            row는 Object[] 배열이므로, for-each 루프를 통해 배열의 각 요소(col)를 순회합니다.
-            col은 Object 타입으로, row 배열의 각 요소를 나타냅니다.*/
+            row 는 Object[] 배열이므로, for-each 루프를 통해 배열의 각 요소(col)를 순회합니다.
+            col 은 Object 타입으로, row 배열의 각 요소를 나타냅니다.*/
 
     /* 자료 넣을 때 자료형 지정해줘야하는데 타입이 Object 일 때 데이터베이스에 저장할 수 없으므로 */
 
