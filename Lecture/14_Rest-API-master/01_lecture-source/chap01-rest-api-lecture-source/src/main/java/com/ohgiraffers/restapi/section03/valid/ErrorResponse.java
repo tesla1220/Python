@@ -1,13 +1,10 @@
 package com.ohgiraffers.restapi.section03.valid;
 
-// Exception 이 발생했을 때 사용자 화면에 어떤 식으로 정보를 뿌릴 지 설정
-
 public class ErrorResponse {
 
     private String code;
     private String description;
     private String detail;
-
 
     public ErrorResponse() {
     }

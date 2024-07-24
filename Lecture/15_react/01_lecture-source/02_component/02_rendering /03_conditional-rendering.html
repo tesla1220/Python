@@ -62,16 +62,37 @@
             null, undefined, 0, NaN, '' 이 있다. 
             )
         */
-
+      
         const number = 0;
-        console.log(!!number);  // false
+        console.log(!!number);  // false. 이유는 밑에 참고 
         const element = number && <h1>thruthy 일 때 등장하는 태그</h1>
 
 
         root.render(element);
 
+/*      !!number
+            첫 번째 !number는 number 값의 부정(논리적 NOT)입니다. number가 0이므로, !number는 true가 됩니다. 이는 0이 "falsy" 값이기 때문입니다.
+            두 번째 ! 연산자는 이 true 값을 다시 부정합니다. 그래서 !!number는 false가 됩니다.  */ 
+
 
     </script>
+
+    <!--
+        JavaScript에서 "falsy" 값은 조건문 등에서 불리언 컨텍스트로 평가될 때 false로 간주되는 값을 의미합니다. 
+        JavaScript에는 다음과 같은 여섯 가지 주요 "falsy" 값이 있습니다:
+
+        false
+        0 (숫자 0)
+        -0 (음수 0)
+        0n (BigInt 0)
+        "" (빈 문자열)
+        null
+        undefined
+        NaN (Not-a-Number)
+
+        이 값들은 모두 불리언 문맥에서 false로 평가됩니다. 
+        예를 들어, if 문에서 이 값들은 false로 간주되어 조건문이 실행되지 않습니다:
+    -->
     
 </body>
 </html>

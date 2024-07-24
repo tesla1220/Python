@@ -22,7 +22,7 @@ import java.util.List;
 
 결과 처리 방식:
 
-엔티티 매핑을 사용하면, 결과를 쉽게 엔티티 객체로 다룰 수 있고, JPA의 다양한 기능(예: 캐싱, 변경 감지 등)을 사용할 수 있습니다.
+엔티티 매핑을 사용하면, 결과를 쉽게 엔티티 객체로 다룰 수 있고, JPA 의 다양한 기능(예: 캐싱, 변경 감지 등)을 사용할 수 있습니다.
 원시 데이터 형태로 결과를 받으면, 각 결과를 수동으로 처리해야 하지만 더 유연한 쿼리 작성과 빠른 성능을 기대할 수 있습니다.
 */
 
@@ -45,10 +45,11 @@ public class NativeQueryTests {
     @PersistenceContext
     private EntityManager manager;
 
-    /* 1. 결과 타입 정의한 경우 */
-    /* 필기
-        모든 컬럼값을 매핑하는 경우에만 타입을 특정할 수 있다.
-        일부 컬럼만 조회를 하고 싶은 경우 -> Object[], 스칼라값을 별도로 담을 클래스를 정의해서 사용해야한다.
+
+
+    /* 필기 1. Native Query 결과 타입 정의한 경우
+            모든 컬럼값을 매핑하는 경우에만 타입을 특정할 수 있다.
+            일부 컬럼만 조회를 하고 싶은 경우 -> Object[], 스칼라값을 별도로 담을 클래스를 정의해서 사용해야한다.
      */
 
     @DisplayName("결과 타입을 정의한 Native query 사용해보기")
@@ -108,6 +109,9 @@ public class NativeQueryTests {
 
     }
 
+
+
+    /* 필기 2. Native Query 결과 타입 정하지 않은 경우 */
     @DisplayName("결과 타입을 지정할 수 없는 Native Query 테스트")
     @Test
     void testNativeQueryNonResultType() {
@@ -150,7 +154,8 @@ public class NativeQueryTests {
 
 
 
-    /* 3. 결과 매핑을 사용하는 경우 => 자동 vs 수동 */
+
+    /* 필기 3. 결과 매핑을 사용하는 경우 => 자동 vs 수동 */
     @DisplayName("자동 결과 매핑을 사용한 Native Query 조회 테스트")
     @Test
     @Transactional
@@ -250,17 +255,7 @@ public class NativeQueryTests {
             COUNT(*) AS menu_count
              ▶️ tbl_menu 테이블에서 각 카테고리(b.category_code)에 속한 메뉴의 개수를 세어 menu_count 라는 이름으로 지정합니다.
 
-            b.category_code
-             ▶️ tbl_menu 테이블의 category_code 컬럼을 선택합니다. 이 컬럼은 메뉴가 속한 카테고리의 코드를 나타냅니다.
 
-
-           FROM tbl_menu b
-             ▶️tbl_menu 테이블을 b라는 별칭으로 지정합니다.
-
-           GROUP BY b.category_code
-             ▶️ category_code 별로 메뉴 개수를 그룹화합니다.
-
-           이 하위 쿼리는 각 category_code 별로 메뉴 개수를 계산하여 v라는 임시 테이블을 만듭니다.
 
            ON (a.category_code = v.category_code)
               ▶️ 조인의 조건을 지정합니다. tbl_category 테이블의 category_code 와 하위 쿼리의 category_code 가 일치하는 행을 결합합니다.

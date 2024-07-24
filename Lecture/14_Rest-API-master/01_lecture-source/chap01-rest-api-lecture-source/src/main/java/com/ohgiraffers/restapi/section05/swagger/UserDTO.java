@@ -7,7 +7,7 @@ import java.time.LocalDate;
 @Schema(description = "회원정보 관련 DTO")
 public class UserDTO {
 
-    @Schema(description = "회원정보(PK)")
+    @Schema(description = "회원번호(PK)")
     private int no;
 
     @Schema(description = "회원 ID")
@@ -16,10 +16,10 @@ public class UserDTO {
     @Schema(description = "회원 비밀번호")
     private String pwd;
 
-    @Schema(description = "회원 성명", example = "조평훈") // 이렇게 예시 데이터도 넣어줄 수 있다
+    @Schema(description = "회원 성명", example = "조평훈")
     private String name;
 
-    @Schema(description = "회원 등록일시")
+    @Schema(description = "회원 등록 일시")
     private LocalDate enrollDate;
 
     public UserDTO() {

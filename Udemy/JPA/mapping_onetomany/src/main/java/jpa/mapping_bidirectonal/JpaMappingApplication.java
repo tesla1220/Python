@@ -34,7 +34,7 @@ public class JpaMappingApplication {
 
 //            findInstructorWithCourses(appDAO);
 
-//            findCoursesForInstructor(appDAO);
+            findCoursesForInstructor(appDAO);
 
 //            findInstructorWithCoursesJoinFetch(appDAO);
 
@@ -44,7 +44,7 @@ public class JpaMappingApplication {
 
 //            deleteInstructor(appDAO);
 
-            deleteCourse(appDAO);
+//            deleteCourse(appDAO);
         };
     }
 
@@ -137,7 +137,7 @@ public class JpaMappingApplication {
 
     private void findCoursesForInstructor(AppDAO appDAO) {
 
-        int instructorId = 1;
+        int instructorId = 8;
         System.out.println("Finding instructor id : " + instructorId);
 
         Instructor tempInstructor = appDAO.findInstructorById(instructorId);
@@ -149,8 +149,8 @@ public class JpaMappingApplication {
 
         List<Course> courses = appDAO.findCoursesByInstructorId(instructorId);
 
-        // associate the objects
 
+        // associate the objects
         tempInstructor.setCourses(courses);
 
         System.out.println("the associated courses : " + tempInstructor.getCourses());
@@ -208,10 +208,10 @@ public class JpaMappingApplication {
 
     private void createInstructorWithCourses(AppDAO appDAO) {
 
-        // create the instructor
+        // 새로운 Instructor 객체 생성
         Instructor tempInstructor = new Instructor("Susan", "Public","susan@luv.com");
 
-        // create the instructor detail
+        // 새로운 InstructorDetail 객체 생성 및 설정
         InstructorDetail tempInstructorDetail
                 = new InstructorDetail("http://susan.com/youtude","Pubg");
 
@@ -219,11 +219,11 @@ public class JpaMappingApplication {
         // associate the objects
         tempInstructor.setInstructorDetail(tempInstructorDetail);
 
-        // create some courses
+        // 새로운 Course 객체 생성
         Course tempCourse1 = new Course("Air Guitar - The Ultimate Guid");
         Course tempCourse2 = new Course("Dance - The Master's Dance");
 
-        // add courses to instructor
+        // add courses to instructor => Course 객체를 Instructor 객체에 추가
         tempInstructor.add(tempCourse1);
         tempInstructor.add(tempCourse2);
 
@@ -287,10 +287,10 @@ public class JpaMappingApplication {
 
     private void createInstructor(AppDAO appDAO) {
 
-//        // create the instructor
+//        // 새로운 instructor 객체 생성
 //        Instructor newInstructor = new Instructor("Chad", "Darby","darby@luv.com");
 //
-//        // create the instructor detail
+//        // 새로운 InstructorDetail 객체 생성 및 설정
 //        InstructorDetail newInstructorDetail
 //                = new InstructorDetail("http://blah.com/youtude","luv 2 code!!");
 

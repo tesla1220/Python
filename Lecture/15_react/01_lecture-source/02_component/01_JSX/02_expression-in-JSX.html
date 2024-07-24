@@ -32,5 +32,23 @@
         ReactDOM.createRoot(document.getElementById('root')).render(element);
 
     </script>
+
+    <!--
+            <div id="haha"></div>
+                이 코드는 id가 haha인 빈 <div> 요소를 정의합니다. 이 요소는 나중에 JavaScript로 접근하기 위한 목적으로 사용됩니다.
+
+            ================== 여기까지 자바 스크립트 부분 ===============
+
+            ================== 아래부터 HTML 부분 =====================
+                    getElementById('root')
+                        HTML 문서에서 id가 root인 요소를 찾아서 반환합니다. 이 선택된 요소는 React 컴포넌트가 렌더링될 컨테이너 역할을 합니다.
+                        따라서 <div> 요소가 비어있더라도, 이 요소는 React 컴포넌트가 렌더링될 장소로 사용됩니다.
+
+                    ReactDOM.createRoot 
+                        위의 요소를 기반으로 React 루트를 생성합니다.
+
+                    .render(element)
+                        생성된 루트에 element를 렌더링합니다. 이 element는 <h1>Hi, {forMatName(user)}</h1>입니다.
+    -->
 </body>
 </html>

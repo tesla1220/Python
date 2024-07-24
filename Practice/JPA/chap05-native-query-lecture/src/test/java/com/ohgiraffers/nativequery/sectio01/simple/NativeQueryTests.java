@@ -18,10 +18,9 @@ public class NativeQueryTests {
 
 
     @PersistenceContext
-    private EntityManager manager;
+    private EntityManager entityManager;
 
-
-    @DisplayName("결과 타입을 정의한 Native query")
+    @DisplayName("결과 타입 정의한 Native Query 사용해보기")
     @Test
     @Transactional
     void testNativeQueryByResultType() {
@@ -30,36 +29,93 @@ public class NativeQueryTests {
         int menuCode = 15;
 
         // when
-        String query = "SELECT menu_code, menu_name, menu_price, category_code, orderable_status" + " FROM tbl_menu" + " WHERE menu_code=?";
+        String query = "SELECT menu_code, menu_name, menu_price, category_code, orderable_status"
+                + " FROM tbl_menu"
+                + " WHERE menu_code = ? ";
 
-        Query nativeQuery = manager.createNativeQuery(query, Menu.class).setParameter(1, 15);
+        Query nativeQuery = entityManager.createNativeQuery(query, Menu.class).setParameter(1, menuCode);
 
-        Menu resultMenu = (Menu) nativeQuery.getSingleResult();
+        Menu menuEntity = (Menu) nativeQuery.getSingleResult();
 
-        Assertions.assertNotNull(resultMenu);
-        Assertions.assertTrue(manager.contains(resultMenu));
+        Assertions.assertNotNull(menuEntity);
 
-        System.out.println("resultMenu : " + resultMenu);
-        System.out.println("manager.contains(resultMenu) : " + manager.contains(resultMenu));
+        Assertions.assertTrue(entityManager.contains(menuEntity));
+
+        System.out.println("menuEntity : " + menuEntity);
 
     }
 
-    @DisplayName("결과타입 지정할 수 없는 Native Query")
+    @DisplayName("결과 타입 지정할 수 없는 Native Query 사용해보기")
     @Test
-    void testNativeQuery() {
+    void testNativeQueryNonResultType() {
 
-        String query = "SELECT menu_name, menu_price FROM tbl_menu";
+        String theNativeQuery = "SELECT menu_name, menu_price FROM tbl_menu";
 
-        List<Object[]> menuList = manager.createQuery(query).getResultList();
+        List<Object[]> reesultMenuList = entityManager.createNativeQuery(theNativeQuery).getResultList();
 
-        Assertions.assertNotNull(menuList);
-        menuList.forEach(
+        Assertions.assertNotNull(reesultMenuList);
+
+        reesultMenuList.forEach(
                 row -> {
-                    for (Object col : row ){
-                        System.out.print(col + " ");
+                    for ( Object col : row ) {
+                        System.out.println( col + " ");
                     }
                     System.out.println();
                 }
         );
+
     }
+
+    /* 코드 연습 */
+    @DisplayName("Native query 코드 연습: 결과 타입(Menu Entity) 정의 ")
+    @Test
+    @Transactional
+    void testChatGPT() {
+
+        int menuCode = 123;
+
+        String thisIsQuery = "SELECT menu_code, menu_name, menu_price, category_code, orderable_status "
+                + "FROM tbl_menu"
+                + " WHERE menu_code = ? ";
+
+        Query nativeQuery = entityManager.createNativeQuery(thisIsQuery, Menu.class).setParameter(1, menuCode);
+
+        Menu resultMenuEntity = (Menu) nativeQuery.getSingleResult();
+
+        Assertions.assertNotNull(resultMenuEntity);
+        Assertions.assertTrue(entityManager.contains(resultMenuEntity));
+
+        System.out.println("resultMenuEntity : " + resultMenuEntity);
+    }
+
+    @DisplayName("Native Query 테스트: 결과 타입 지정X ")
+    @Test
+    void textNonResultTypeNativeQuery() {
+
+        String thisIsQuery = "SELECT category_name, ref_category_code FROM tbl_category";
+
+        List<Object[]> theCategoryList = entityManager.createNativeQuery(thisIsQuery).getResultList();
+
+        Assertions.assertNotNull(theCategoryList);
+        theCategoryList.forEach(
+                row -> {
+                    for (Object col : row) {
+                        System.out.println(col + " ");
+                    }
+                    System.out.println();
+                }
+        );
+
+
+        }
+
+
+/* 3. 결과 매핑 사용하는 경우 => 자동 vs 수동 */
+
+    @DisplayName("Native Query Test: 자동 결과 매핑을 사용한 조회 테스트 ")
+    @Test
+    void testAutoMapping() {
+        // 카테 고리 기준으로 카테고리 코드별 메뉴 개수 조회
+    }
+
 }

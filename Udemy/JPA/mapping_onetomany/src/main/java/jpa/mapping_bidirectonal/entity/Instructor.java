@@ -131,34 +131,66 @@ public class Instructor {
 }
 
 /*
-    add 메소드는 두 개의 객체, 예를 들어 Instructor(강사)와 Course(강의) 사이의 관계를 더 쉽게 관리하기 위해 만들어졌습니다.
+물론입니다! 주어진 코드를 쉽게 설명해드리겠습니다.
+코드 전체 설명
 
-    왜 이 메소드를 추가했는가?
+java
 
-    자동으로 연결:
-    이 메소드는 강사와 강의를 자동으로 연결해 줍니다.
-    예를 들어, 한 강사가 새로운 강의를 추가할 때 이 메소드를 사용하면, 그 강의가 자동으로 강사에 속하게 됩니다.
-    instructor.add(course) 이렇게 호출하면 됩니다.
+public void add(Course tempCourse) {
+    if (courses == null) {
+        courses = new ArrayList<>();
+    }
 
-    편리함:
-    강의 목록이 비어 있을 때 자동으로 목록을 만들어줍니다.
-    강의 리스트가 비어 있는 경우에도 강의를 추가할 수 있게 해줍니다.
-    따라서 수동으로 리스트를 만들 필요가 없습니다.
+    courses.add(tempCourse);
 
-    일관성 유지:
-    강사와 강의의 연결이 항상 정확하게 맞아떨어지게 해줍니다.
-    강사에 강의를 추가하면 그 강의에도 자동으로 이 강사가 설정됩니다.
-    이렇게 하면 실수를 줄일 수 있습니다.
+    tempCourse.setInstructor(this);
+}
 
-    예를 들어:
+이 메서드는 Instructor 클래스의 메서드로, Course 객체를 Instructor 객체의 courses 리스트에 추가하는 기능을 합니다.
+각 줄의 설명
 
-    강사가 있고, 강의가 있을 때:
-    Instructor instructor = new Instructor();
-    Course course = new Course();
+    메서드 선언:
 
-    강사가 강의를 추가할 때:
-    instructor.add(course);
+    java
 
-    이렇게 하면, instructor의 강의 목록에 course가 추가되고, 동시에 course의 강사도 instructor로 설정됩니다.
-    이 메소드는 강사와 강의 사이의 관계를 쉽게 만들고 관리할 수 있게 해주는 도우미 역할을 합니다.
-*/
+public void add(Course tempCourse) {
+
+    public void add(Course tempCourse)는 add라는 이름의 메서드를 선언합니다.
+    이 메서드는 Course 타입의 tempCourse 매개변수를 받아들이며, 반환값이 없습니다(void).
+
+리스트 초기화 검사:
+
+java
+
+if (courses == null) {
+    courses = new ArrayList<>();
+}
+
+    if (courses == null) {}: courses 리스트가 초기화되지 않았는지 확인합니다.
+    courses == null: courses 필드가 null인 경우, 즉, 아직 초기화되지 않은 경우를 의미합니다.
+    courses = new ArrayList<>();: courses 리스트를 새 ArrayList로 초기화합니다. 이렇게 함으로써 courses 필드가 빈 리스트로 설정됩니다.
+
+강의 추가:
+
+java
+
+courses.add(tempCourse);
+
+    courses.add(tempCourse);: tempCourse 객체를 courses 리스트에 추가합니다.
+
+강의에 강사 설정:
+
+java
+
+    tempCourse.setInstructor(this);
+
+        tempCourse.setInstructor(this);: tempCourse 객체의 instructor 필드를 현재 Instructor 객체(this)로 설정합니다.
+        이를 통해 tempCourse 객체가 이 Instructor 객체와 연관되도록 설정됩니다.
+
+전체적인 흐름
+
+    메서드가 호출되면 tempCourse라는 Course 객체를 매개변수로 받습니다.
+    courses 리스트가 초기화되지 않았다면(null이라면), 새 ArrayList로 초기화합니다.
+    tempCourse 객체를 courses 리스트에 추가합니다.
+    tempCourse 객체의 instructor 필드를 현재 Instructor 객체로 설정하여, tempCourse 객체가 이 Instructor 객체와 연관되도록 합니다.
+ */

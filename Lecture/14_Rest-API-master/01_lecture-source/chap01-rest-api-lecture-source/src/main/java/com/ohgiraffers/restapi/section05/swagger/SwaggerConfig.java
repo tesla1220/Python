@@ -22,7 +22,7 @@ public class SwaggerConfig {
     private Info swaggerInfo() {
         return new Info()
                 .title("Ohgiraffers API")
-                .description("Spring Boot Swagger 연동 테스트")
+                .description("SpringBoot Swagger 연동 테스트")
                 .version("1.0.0");
     }
 

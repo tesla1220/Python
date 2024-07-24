@@ -1,4 +1,4 @@
-package jpa.mapping.onetoone.entity;
+package jpa.mapping_bidirectonal.entity;
 
 import jakarta.persistence.*;
 
@@ -28,6 +28,16 @@ public class InstructorDetail {
 
     @Column(name = "hobby")
     private String hobby;
+
+    // add @OneToOne annotation
+    @OneToOne(mappedBy = "instructorDetail",  // Cascade Type -> Instructor Detail만 제거하고 싶을 때 -> Remove 만 제외
+            cascade = {CascadeType.DETACH, CascadeType.MERGE, CascadeType.PERSIST, CascadeType.REFRESH})
+    private Instructor instructor;
+    /* mappedBy = "instructorDetail" ▶️ InstructorDetail 클래스가 Instructor 클래스에 의해 매핑된다는 것을 의미 */
+
+    public InstructorDetail(Instructor instructor) {
+        this.instructor = instructor;
+    }
 
     public InstructorDetail() {}
 
@@ -59,6 +69,16 @@ public class InstructorDetail {
     public void setHobby(String hobby) {
         this.hobby = hobby;
     }
+
+    public Instructor getInstructor() {
+        return instructor;
+    }
+
+    public void setInstructor(Instructor instructor) {
+        this.instructor = instructor;
+    }
+
+
 
     @Override
     public String toString() {

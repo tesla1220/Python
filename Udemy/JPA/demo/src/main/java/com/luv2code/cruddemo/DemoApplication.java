@@ -1,6 +1,7 @@
 package com.luv2code.cruddemo;
 
 import com.luv2code.cruddemo.dao.StudentDAO;
+import com.luv2code.cruddemo.dao.StudentDAOImpl;
 import com.luv2code.cruddemo.entity.Student;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
@@ -8,6 +9,12 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.context.annotation.Bean;
 
 import java.util.List;
+
+
+/* 순서
+1. DAO 클래스에 메소드 정의 Parameter 는 Entity.
+2. DAO Impl 클래스에 entity Manager 로 데이터 처리
+3. Main app 에 처리할 데이터 내용 정의 */
 
 @SpringBootApplication
 public class DemoApplication {
@@ -18,6 +25,16 @@ public class DemoApplication {
 
 /* StudentDAO를 CommandLineRunner 메서드의 매개변수로 받는 이유는,
 이 DAO 객체를 사용하여 애플리케이션 시작 시점에 데이터베이스 관련 작업을 수행하기 위함 */
+
+/* @Bean 메서드 - commandLineRunner:
+@Bean 애너테이션이 붙은 메서드는 스프링 컨테이너에 빈을 등록하는 역할을 합니다.
+commandLineRunner 메서드는 StudentDAO를 파라미터로 받아 CommandLineRunner 객체를 반환합니다.
+CommandLineRunner는 함수형 인터페이스로서, run 메서드를 구현해야 합니다. 이 메서드는 애플리케이션이 실행될 때 호출됩니다.
+
+람다 표현식 (Lambda Expression):
+runner -> { } 부분은 람다 표현식으로, CommandLineRunner의 run 메서드를 구현하는 부분입니다.
+여기에 원하는 초기화 작업을 추가할 수 있습니다. 예를 들어, 애플리케이션 시작 시 데이터를 초기화하거나 특정 작업을 수행하는 코드를 작성할 수 있습니다.*/
+
     @Bean
     public CommandLineRunner commandLineRunner(StudentDAO studentDAO){
 
@@ -66,14 +83,19 @@ public class DemoApplication {
         int studentId = 1;
         System.out.println("Getting student with id : " + studentId);
 
+
+        /*
+            1. find the Data by ID using the existing method for findById
+            2. transforming the found data to the Entity Type
+        */
         Student myStudent = studentDAO.findById(studentId);
         System.out.println("myStudent : " + myStudent);
 
-        // change first name to "John"
+        // using setter to update the data
         System.out.println("Updating student");
         myStudent.setFirstName("John");
 
-        // update the student
+        // create method on DAO interface to update the data
         studentDAO.update(myStudent);
 
         // display the updated student
@@ -126,7 +148,7 @@ public class DemoApplication {
 
     }
 
-    private void createMultipleStudents(StudentDAO studentDAO) {
+    public void createMultipleStudents(StudentDAO studentDAO) {
 
         // create multiple students
         System.out.println("Creating 3 student objects !!");

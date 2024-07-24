@@ -4,15 +4,25 @@ import jakarta.persistence.*;
 
 
 @Entity(name = "section01Category")
-@Table(name = "tbl_menu")
-@SqlResultSetMappings(value = {
+@Table(name = "tbl_category")
+@SqlResultSetMappings(value = {@SqlResultSetMapping(
+        name = "categoryAutoMapping",
+        entities = {@EntityResult(entityClass = Category.class)},
+        columns = {@ColumnResult(name = "menu_count")}
+),
         @SqlResultSetMapping(
-                name = "categoryAutoMapping",
-                entities = {@EntityResult(entityClass = Category.class)},
+                name = "categoryManualMapping",
+                entities = {
+                        @EntityResult(entityClass = Category.class,
+                                      fields = {@FieldResult(name = "categoryCode", column = "category_code"),
+                                                @FieldResult(name = "categoryName", column = "category_name"),
+                                                @FieldResult(name = "refCategoryCode", column = "ref_category_code")
+                                      }
+                        )
+                },
                 columns = {@ColumnResult(name = "menu_count")}
-        ),
+        )
 })
-
 public class Category {
 
     @Id

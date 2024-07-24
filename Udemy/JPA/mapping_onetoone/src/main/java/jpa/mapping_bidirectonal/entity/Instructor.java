@@ -1,4 +1,4 @@
-package jpa.mapping.onetoone.entity;
+package jpa.mapping_bidirectonal.entity;
 
 import jakarta.persistence.*;
 

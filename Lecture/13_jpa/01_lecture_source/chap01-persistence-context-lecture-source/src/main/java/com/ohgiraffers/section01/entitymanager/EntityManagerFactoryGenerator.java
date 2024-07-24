@@ -14,7 +14,10 @@ public class EntityManagerFactoryGenerator {
             /*  EntityManagerFactory 타입의 static 변수를 초기화
             -> Persistence 클래스의 createEntityManagerFactory 메소드를 호출해서 EntityManagerFactory 인스턴스를 생성해.
                 이 메소드에 "jpatest" 라는 문자열을 전달하는데,
-                이 문자열은 persistence.xml 파일에 정의된 영속성 유닛(persistence unit)의 이름이야.*/
+                이 문자열은 persistence.xml 파일에 정의된 영속성 유닛(persistence unit)의 이름이야.
+
+            ->  Persistence.createEntityManagerFactory("jpatest") 메서드를 사용하여
+                persistence.xml 파일에 정의된 persistence-unit 이름이 "jpatest"인 설정을 기반으로 팩토리를 생성합니다.*/
 
 
     /*
@@ -32,7 +35,7 @@ public class EntityManagerFactoryGenerator {
      * */
 
 
-    // 이 클래스 외부에서 접근 못하도록 아래와 같이 설정. 왜 생성자를 private 로 만드는 지는 하단 필기 참고
+    // 생성자 private 으로 외부에서 객체 생성을 막음. 왜 생성자를 private 로 만드는 지는 하단 필기 참고
     private EntityManagerFactoryGenerator() {}
     /*
     EntityManagerFactoryGenerator 클래스의 생성자를 정의한 거야.
@@ -41,14 +44,16 @@ public class EntityManagerFactoryGenerator {
     이렇게 하면 EntityManagerFactoryGenerator 클래스 내부에서만 인스턴스를 생성할 수 있어.
     */
 
-    // 상기 메소드들은 다 private 로 외부에서 접근 불가하기 때문에 외부 접근 가능하도록 아래 메소드 만들어줌
+    // 싱글톤 인스턴스를 반환하는 public static 메서드
     public static EntityManagerFactory getInstance() {
-        /* 이 메서드는 클래스의 유일한 인스턴스를 반환합니다. static 메서드이기 때문에 클래스 이름으로 직접 호출할 수 있습니다. */
+        /* 이 클래스의 유일한 정적 메서드로, EntityManagerFactory 인스턴스를 반환합니다. 이를 통해 factory 객체에 접근할 수 있습니다. */
 
         // getInstance 를 통해서만 접근 가능하도록 설정
         return factory;
         /* 클래스 로드 시 생성된 factory 인스턴스를 반환합니다.
-        이를 통해 어디서든 이 메서드를 호출하여 동일한 EntityManagerFactory 인스턴스를 사용할 수 있습니다. */
+        이를 통해 어디서든 이 메서드를 호출하여 동일한 EntityManagerFactory 인스턴스를 사용할 수 있습니다.
+
+       */
 
     }
 

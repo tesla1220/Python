@@ -15,7 +15,7 @@ public class StudentDAOImpl implements StudentDAO {
     // define field for entity manager
     private EntityManager entityManager;
 
-    // inject entity manager using constructor injection
+    // constructor injection for using Entity Manager
     @Autowired
     public StudentDAOImpl(EntityManager entityManager){
         this.entityManager = entityManager;
@@ -66,10 +66,10 @@ public class StudentDAOImpl implements StudentDAO {
 
     @Override
     @Transactional
-    public void delete(Integer id) {
+    public void delete(Integer theId) {
 
-        // retrieve the student
-        Student deleteStudent = entityManager.find(Student.class, id);
+        // retrieve the student => 데이터 타입 엔티티로 바꿔줘야함
+        Student deleteStudent = entityManager.find(Student.class, theId);
 
         // delete the student
         entityManager.remove(deleteStudent);
